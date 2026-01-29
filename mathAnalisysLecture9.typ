@@ -230,3 +230,93 @@ $(C_(2n)^n)/4^n = ((2n)!! (2n-1)!!)/(2^n (n!) dot 2^n n!) = (2n-1)!!/(2n)!!$ \
 
 Формула Валлиса $(2n-1)!!/(2n)!! dot sqrt(2n+1) -> sqrt(2/pi)$ \
 $(2n+1)!!/(2n)!! tilde sqrt(2/pi) dot 1/(sqrt(2n+1)) tilde sqrt(2/pi) dot 1/(sqrt(2n)) = 1/sqrt(pi n)$
+
+== Формула Тейлора с остатком в интегральной форме
+$f: chevron a, b chevron.r -> RR, f in C^(n+1) chevron a , b chevron.r, x_0, x in chevron a, b chevron.r$ \
+Тогда $f(x) = sum_(k=0)^n (f^((k))(x_0))/(k!) (x-x_0)^k + 1/n! integral_(x_0)^x f^((n+1)) (t) (x-t)^n d t$
+=== Доказательство
+Индкукция по $n$ \
+База $n = 0$ \
+$f(x) = f(x_0) + 1/0! integral_(x_0)^x f`(t) d t = f(x_0) +f(x) - f(x_0)$ \
+Переход $n -> n+1$ \
+$f(x) = sum_(k=0)^n (f^((k)) (x_0))/k (x-x_0)^k + 1/n! underbrace(integral_(x_0)^x f^((n+1)) (t) (x-t)^n d t, I:= )$ \
+$I = $ \
+$u = f^((n+1)), u` = f^((n+2)), v = (x-t)^n, v` = -(x-t)^n/(n+1)$ \
+$I = integral_(x_0)^x u v` = u v |_(x_0)^x - integral_(x_0)^(x) u` v = underbrace(-(f^((n+1)) (t))/(n+1) (x-t)^(n+1)|_(t=x_0)^(t=x), (f^((n+1))(x_0))/(n+1) dot (x-x_0)^(n+1)) + integral_(x_0)^x (f^((n+2)) (t))/(n+1) (x-t)^((n+1)) d t$ \
+$f(x) = (f^((n+1)) (x_0))/(n+1)! (x-x_0)^(n+1) + 1/(n+1)! integral_(x_0)^x f^((n+2))(t) (x-t)^(n+1) d t$
+=== Пример
+$H_j := 1/j! integral_0^(pi/2) ((pi/2)^2 - x^2)^j cos x d x$ \
+Наблюдение: эта штука точно положительна, значит интегральчик точно положительный
+Свойтсва:
++ $0 < H_j <= 1/j!, integral_0^(pi/2) (pi/2)^(2j) cos x d x = (pi/2)^(2j)/j!$
++ Если $c in RR$, то $c^j H_j -> 0$, так как $0 <= abs(c^j H_j) <= (abs(c) pi^2/4)^j/j! ->_(j->oo) 0$
++ $H_0 = 1, H_1 = 2$
++ $H_j = (4j - 2)H_(j-1) -pi^2 H_(j-2)$, при $j>=2$ \ Доказательство: $j! H_j = integral_0^(pi/2) ((pi/2)^2 -x^2)^j cos x d x $ \ $u = ((pi/2)^2 -x^2)^j, v` = cos x, u` = - 2x j ((pi/2)^2 - x^2)^((j-1)), v = sin x$ \ $underbrace(((pi/2)^2 - x^2)^j sin x |_(x=0)^(x=pi/2), =0 ) + 2j integral_0^(pi/2) x ((pi/2)^2 - x^2)^(j-1) sin x d x$ \ $u = x ((pi/2)^2 - x^2)^(j-1), v` = sin x, v = -cos x, u` = ((pi/2)^2 - x^2)^(j-1) - 2 (j-1)x^2((pi/2)^2 - x^2)^(j-2) =, x = (pi/2)^2 - ((pi/2)^2 -x^2), = ((pi/2)^2 - x^2)^(j-1) - 2(j-1) (pi/2)^2 ((pi/2)^2 - x^2)^(j-2) + 2(j-1) ((pi/2)^2 -x^2)^(j-1)$ \ подставляем в изначальный интеграл: \ $= 2j (x((pi/2)^2 -x^2)^(j-1) (-cos x)|_(x=0)^(x=pi/2) +  (2j - 1) integral_(0)^(pi/2) ((pi/2)^2 - x^2)^(j-1) cos x d x - (pi^2/4) 2(j-1) integral_0^(pi/2) ((pi/2)^2 - x^2)^(j-2) cos x d x ) = j!$ \ $j! H_j = 2j (2j - 1) (j-1)! H_(j-1) -2j pi^2/4  2 (j-1) (j-2)! H_(j-2)$ \ $H_j = 2 (2j- 1) H_(j-1) - pi^2 H_(j-2)$ 
+== Теорема Ламберта 
+$pi$ и $pi^2$ - иррациональное число \
+=== Доказательство
+От противного. Предположим, что $pi^2 = m/n$, где $m, n in NN$ \
+Проверим, что тогда $n^j H_j$ - целое число По индукции по $j$. База $j = 0, j = 1$ очевидный \ Переход $j-2, j - 1 -> j$ \
+$n^j H_j = underbrace((4j - 2) dot n, "целое") dot n^(j-1) H_j-1 - underbrace(n^2 pi^2, =m^2 n "целое") n^(j-2) H_(j-2)$ - индукционное предположение \
+Понимаем, что $n^j H_j$ - целоеб $n^j H_j > 0$ $=>$ - $n^j H_j >= 1$, с другой стороны, если воспользуемся свойством номер 2 $n^j H_j ->_(j->oo) 0$, противоречие :(
+= Интегральные суммы
+== Определение равномерно непрерывной функции
+$f: E -> RR$ равномерно непрерывна, если $forall " " epsilon > 0 " " exists delta > 0: forall x, y in E, "т.ч" abs(x-y) < delta => abs(f(x) - f(y)) < epsilon $ \
+=== Замечание
+$f$ непрерывна во всех точках из $E$ означает, что $forall y in E " " forall epsilon > 0 " " exists delta > 0, forall x in E, "т.ч" abs(x-y) < delta => abs(f(x) - f(y)) < epsilon$
+=== Примеры
+1. $sin$ и $cos$ равномерно непрерывны на $RR$, $abs(sin x - sin y) <= abs(x - y) => delta = epsilon$ подходит \
+2. $f(x) = x^2$ не равномерно непрерынвая на $RR$ \ Возьмем $epsilon = 1: $ Проверим, что никакое $delta > 0$ не подходит $f(x + delta/2) - f(x) = (x+delta/2)^2 - x^2 = x dot delta + delta^2/4 > x dot delta$ для $x = 1/delta$ все плохо \ $f(1/delta + delta/2) - f(1/delta) > 1$
+3. $f(x) = 1/x$ не является равномерно непрерывной на $(0,1]$ \ Возьмем $epsilon = 1$ Проверим, что никакое $0 < delta < 1$, $x = delta/2, y = delta, f(x) - f(y) = 2/delta - 1/delta = 1/delta > 1$ \
+== Определение
+$f: E -> RR$ липшицева с константой $M$, если $forall x, y in E$ $abs(f(x) - f(y)) <= M abs(x - y)$ \
+=== Замечание
++ липшицевость $=>$ равномерно непрерывна (просто берем в качестве $delta = epsilon/M$)
++ Если $f: chevron a, b chevron.r -> RR$ дифференцируема и $abs(f`) <= M$ на $chevron a, b chevron.r$, то $f$ липшицева с константой $M$ и, в частонсти, равномерно непрерывна 
+== Теорема Кантора 
+Непрерывная на отрезке функция равномерно непрерывна
+=== Доказательство
+$f: [a,b] -> RR$
+Возьмем $epsilon > 0$, предположим, что никакое $delta$ для него не подходит  \
+$delta = 1$ не подходит, значит найдутся такие точки $x_1, y_1 in [a,b]$, такое что $abs(x_1 - y_1) < 1,$ но при этом $abs(f(x_1) - f(y_1)) >= epsilon$  \
+$delta = 1/2$ не подходит, значит найдутс такие точки $x_2, y_2 in [a,b]$, такое что $abs(x_1 - y_1) < 1/2$ и $abs(f(x_2) - f(y_2)) >= epsilon$ \
+$dots$ \
+$delta = 1/n$ не подходит $=>$ найдутся $x_n, y_n in [a,b]$, такие что $abs(x_n - y_n) < 1/n$ и $abs(f(x_n) - f(y_n))>= epsilon$ \
+$y_n in [a,b]$ ограничена, последовательность по Т. Б-В выберем подпоследовательность $y_n_k -> c in [a,b]$ \ $abs(x_n - y_n) < 1/n => lim (x_n - y_n) = 0 => lim x_n_k = lim y_n_k + lim(x_n_k - y_n_k) = c + 0 = c$ \ $f$ непрерывна в $c$ означает, что $lim f(x_n_k) = f(c)$, аналогично $f(y_n_k) = f(c)$, тогда пердел разности $lim(f(x_n_k) - f(y_n_k)) = 0$, но с другой стороны $abs(f(x_n_k) - f(y_n_k)) >= epsilon$ противоречие, значит предположение не верно и какое-то $delta$ подойдет
+== Определение
+$f: E -> RR$ модуль непрерывности $omega_f (delta), delta > 0, omega_f (delta) := sup {abs(f(x) - f(y)) : x, y in E and abs(x - y) <= delta}$ 
+=== Свойства
++ $omega_f (0) = 0$ и $omega_f (delta) >= 0$ 
++ $omega_f$ нестрого возрастает 
++ $omega_f (abs(x-y)) >= abs(f(x) - f(y))$
++ Если $f$ липшицева с константой $M$, то $omega_f (delta) <= M dot delta$ $abs(f(x) - f(y)) <= M abs(x -y) <= M dot delta$ 
++ $f: E -> RR$, тогда $f$ равномерно непрерывна на $E$ $<=> lim_(delta-> 0+) omega_f (delta) = omega_f (0) = 0$ \ Доказательство: \ $=>$ $forall epsilon > 0 " " exists delta >0 " " forall x, y in E and abs(x-y) < delta => abs(f(x) - f(y)) < epsilon$, тогда если $abs(x-y) <= delta/2 < delta$, тогда $abs(f(x) - f(y)) < epsilon => omega_f (delta/2) = sup{ abs(f(x) - f(y)) : abs(x-y) <= delta/2}$  \ Следовательно, при $0 <= t <= delta/2 " " 0 <= omega_f (t) <=  omega_f (delta/2) <= epsilon => lim_(t-> 0+) w_f (t) = 0$ \ $arrow.l.double$ $lim_(delta -> 0+) omega_f(delta) = 0$ по $epsilon > 0$ выберем такое $delta > 0$, что $omega_f (delta) < epsilon$ \ $abs(f(x) - f(y)) <= omega_f (delta) < epsilon$ (если $abs(x-y) < delta$) $=> f$ равномерно непрерывна 
++ Если $f : [a,b] -> RR$ и непрерывна, то $lim_(delta -> 0+) w_f (delta) = 0$ Доказательство: Кантора и свойство 5
+== Определение Дробление отрезка (разбиение, пунктир) 
+Такой набор точек $a = x_0 < x_1 < x_2 < dots < x_(n-1) < x_n = b$ \
+Будем обозначать $tau = {x_0, x_1, dots, x_n}$ \
+Мелкость (ранг) дробления  \
+$abs(tau) = max {x_1 - x_0, x_2 - x_1, dots , x_n - x_(n-1)}$ - длина самого большого отрезка из нарезки \ 
+Оснащение дробления - набор точки $xi_1, xi_2, dots xi_n$ такое что $xi_k in [x_(k-1), x_k]$
+== Определение Сумма Римана (интегральная сумма)
+$f: [a,b] -> RR$ $tau$ - его дробление, $xi$ - оснащение этого дробления $S(f, tau, xi) = sum_(k=1)^n f(xi_k) (x_k - x_(k-1))$
+== Теорема об интегральной сумме 
+$f in C[a,b]$, тогда $Delta := abs(integral_a^b f - S(f, tau, xi)) <=(b-a) omega_f (abs(tau))$ \
+=== Доказательство
+$integral_a^b f - S(f, tau, xi) = integral_a^b f - sum_(k=1)^n f(xi_k) (x_k - x_(k-1)) = sum_(k=1)^n integral_(x_(k-1))^(x_k) f - sum_(k=1)^n f(xi_k) (x_k - x_(k-1)) = sum_(k=1)^n integral_(x_(k-1))^x_k (f_t - f(xi_k)) d t$ \
+$Delta <= sum_(k=1)^n integral_(x_(k-1))^x_k abs(f(t) - f(xi_k)) d t <= sum_(k=1)^n integral_(x_(k-1))^x_k omega_f (abs(tau)) d t = integral_a^b omega_f (abs(tau)) d t = omega_f (abs(tau)) (b-a)$ \ 
+$abs(t - xi_k) <= x_k - x_(k-1) <= abs(tau) => abs(f(t) - f(xi_k)) <= omega_f (abs(tau))$
+
+=== Следствие
+$f in C[a,b]$ Тогда \
+$forall epsilon > 0 " " exists delta > 0 " " forall$ дробления $tau$ мелкости $< delta$ и $forall$ его оснащения $abs(integral_a^b f - S(f, tau, xi)) < epsilon$ \
+=== Следствие 
+$f in C[a,b]$ и $tau_n$ - последовательность дроблений, такая что $tau_n$ стремиться к $0$ \ Тогда $forall xi_n$ - оснащение дроблений $tau_n$ $S(f, tau_n, xi_n) -> integral_a^b f$
+
+=== Пример
+$S_p (n) := 1^p + 2^p + dots + n^p, p > 0$ \
+$lim_(n-> oo) (S_p (n))/(n^(p+1))$ \
+Рассмотрим функцию $f(x) = x^p$ на $[0,1]$ - непрерывная функция \
+дробление $[0,1]$ на равные отрезки $x_k = k/n = xi_k$ \
+$S(f, tau, xi) = sum_(k=1)^n underbrace(f(k/n), (k/n)^p ) overbrace((k/n - (k-1)/n) = 1/(n^(p+1)), 1/n ) dot sum_(k=1)^n k^p = (S_p (n))/(n^(p+1))$\
+Вывод $S_p (n) tilde (n^(p+1))/(p+1)$
