@@ -320,3 +320,114 @@ $lim_(n-> oo) (S_p (n))/(n^(p+1))$ \
 дробление $[0,1]$ на равные отрезки $x_k = k/n = xi_k$ \
 $S(f, tau, xi) = sum_(k=1)^n underbrace(f(k/n), (k/n)^p ) overbrace((k/n - (k-1)/n) = 1/(n^(p+1)), 1/n ) dot sum_(k=1)^n k^p = (S_p (n))/(n^(p+1))$\
 Вывод $S_p (n) tilde (n^(p+1))/(p+1)$
+
+== Определение
+$f: [a,b] -> RR$ интегрируема по Риману на отрезке $[a,b]$, и $I in RR$ ее интеграл, если $forall epsilon > 0: exists delta > 0: forall tau$ - дробления $[a,b]$ и мелкости $< delta$ и $forall$ его оснащения $xi: abs(S(f,tau,xi)  - I) < epsilon$ \
+=== Замечание
+Если $f in C[a,b]$, то она интегрируема по Риману
+
+== Лемма
+$f in C^2[alpha, beta]$, тогда $integral_alpha^beta f - (beta - alpha) dot (f(alpha) - f(beta))/2 = -integral_alpha^beta f(x)`` (beta - x) (x - alpha) d x$
+=== Доказательство
+$gamma:= (alpha + beta)/2$
+$integral_alpha^beta f(x) d x = integral_alpha^beta f(x) (x-gamma)` d x = f(x)(x-gamma)|_(x=alpha)^(x=beta) - integral_alpha^beta f`(x)(x-gamma) d x$ \
+
+$f(x)(x-gamma)|_(x=alpha)^(x=beta) f(beta)(beta-gamma) - f(alpha)(alpha-gamma) = (f(alpha) + f(beta))/2 dot (beta-alpha)$ \
+$Delta | y = f`, v = 1/2(beta-x)(x-alpha), v = 1/2(-alpha beta +(alpha +beta)x - x^2), v` = -x + (alpha+beta)/2 = gamma - x |= -integral_alpha^beta f`(x)(x-gamma) d x = underbrace(1/2 f`(x)(beta-x)(x-alpha) |_(x=alpha)^(x=beta), =0) - 1/2 integral_alpha^beta f``(x) (beta-x)(x-alpha) d x$
+
+== Теорема оценка погрешности в форме трапеций
+$f in C^2[a,b]$ $t$ - дробление отрезка $[a,b]$. Тогда $underbrace(abs(integral_a^b f - sum_(k=1)^n (x_k - x_(k-1) )(f(x_k)+f(x_(k+1)))/2), Delta := )<= 1/8 dot abs(tau)^2 dot integral_a^b abs(f``)$
+
+=== Доказательство
+$Delta = sum_(k=1)^n integral_(x_(k-1))^(x_k) f - sum_(k=1)^n (x_k - x_(k-1)) (f(x_k) + f(x_(k-1)))/2 = - 1/2 sum_(k=1)^n integral_(x_(k-1))^(x_k) f``(x) (x_k - x) (x-x_(k-1)) d x$ \
+$abs(Delta) <= 1/2 sum_(k=1)^n abs(f``(x)) (x_k -x) (x-x_(k-1)) d x <= abs(tau)^2/8 sum_(k=1)^n integral_(x_(k-1))^(x_k) abs(f``) = abs(tau)^2/8 integral_a^b abs(f``)$ \
+$(x_k - x) (x-x_(k-1)) <= (((x_k-x) + (x-x_(k-1)))/2)^2 = (((x_k - x_(k-1)))/2)^2 <= abs(tau)/4$
+
+=== Замечание
+1. Если дробление на равные отрезки, тогда $x_k = a + k/n (b-a) (x_k - x_(k-1) = (b-a)/n)$ и сумма площадей трапеций $= sum_(k=1)^n (b-a)/n dot (f(x_k) + f(x_(k-1)))/2 = (b-a)/n dot ((f(a) + f(b))/2 + sum_(k=1)^n f(x_k) )$ и в этом случае теорема дает $abs(Delta) <= (b-a)^2/(8n^2) integral_a^b abs(f``) = O(1/n^2)$
+2. Как выглядит сумма Римана с равноотстоящими узлами и оснащением в правых концах $S(f, tau, xi) = sum_(k=1)^n f(x_k)(x_k - x_(k-1)) = (b-a)/n sum_(k=1)^n f(x_k)$ \ если $abs(f`) <= M, omega_f (delta) <= M delta$ \ $abs(S(f, tau, xi) - integral_a^b f) <= (b-a) omega_f ((b-a)/n) <= M(b-a)^2/n = O(1/n)$
+
+== Теорема (формула Эйлера-Маклорена для второй производной)
+$f in C^2(m,n), m,n in ZZ, sum_(k=m)^n f(k) = (f(m) + f(n))/2 + integral_m^n f + 1/2 integral_m^n f``(t) {t} (1-{t}) d t$
+=== Доказательство
+1.
+$integral_(k-1)^k f = (f(k)+f(k-1))/2 - 1/2 integral_(k-1)^k f``(t)(k-t)(1-(k-1)) d t = (f(k) + f(k-1))/2 - 1/2 integral_(k-1)^k f``(t) {t} (1-{t}) d t$ \
+$underbrace(sum_(k=m+1)^n integral_(k-1)^k f, integral_m^n f) = underbrace(sum_(k=m+1)^n (f(k) + f(k-1))/2, =sum_(k=m)^n f(k) -(f(m)+f(n))/2 ) - underbrace(1/2 sum_(k=m+1)^n integral_(k-1)^k f``(t){t}(1-{t}) d t, =integral_m^n f``(t) {t}(1-{t}) d t)$ \
+== Примеры
+$S_p (n):= 1^p + 2^p + dots + n^p, p>-1$ \
+$f(x) = x^p, m = 1, f``(x) = p(p-1)x^(p-2)$ \
+$S_p (n) = (1^p + n^p)/2 + underbrace(integral_1^n x^p d x, =(x^(p+1))/(p+1) |_1^n = (n^(p+1)-1)/(p+1) )  + 1/2 integral_1^n p (p-1) x^(p-2) {x}(1-{x}) d x$ \
+$abs(S_p (n) - n^(p+1)/(p+1) -n^p/2 -1/2 +1/(p+1) ) <= (abs(p)abs(p-1))/2 integral_1^n x^(p-2) overbrace({x}(1-{x}),<= 1/2) d x <= (abs(p)abs(p-1))/8 integral_1^n x^(p-1) d x = (abs(p)abs(n^(p-1)-1))/8$\
+$p+1 integral_1^n x^(p-2) d x = x^(p-1)/(p-1) |_(x=1)^(x=n) = (n^(p-1)-1)/(p-1)$ \
+Случай $p in (-1, 1)$ \
+$S_p (n) = n^(p+1)/(p+1) + n^p/2 + O(1)$ \
+Случай $p > 1$ \
+$S_p (n) = n^(p+1)/(p+1) + n^p/2 + O(n^(p-1))$ \
+2.
+Гармонические числа 
+
+$H_n := 1 + 1/2 + 1/3 + dots + 1/n$ \
+$f(x) = 1/x, m = 1, f`` = 2/x^3$ \
+$H_n = (1+1/n)/2 + underbrace(integral_1^n (d x)/x, ln x |_1^n = ln n) + underbrace(integral_1^n ({x}(1-{x}))/(x^3) d x, a_n:=) = ln n + 1/2 +1/(2n) + a_n = ln n + (1/2 + a) + o(1)$ \
+$a_(n+1) = a_n + underbrace(integral_n^(n+1) ({x}(1-{x}))/x^3 d x, >0) => a_(n+1) > a_n$ \
+Проверим ограниченность $a_n <= integral_1^n (1/4)/x^3 d x= -1/8 dot (1/x^2) |_(x=1)^n = 1/8 - 1/(8n^2) <= 1/8$. значит ашки ограничены и существует пердел \
+$a = lim a_n <= 1/8 => a_n = a + o(1)$ \
+$1/2 + a = gamma$ - постоянная эйлера
+== Упражнение
+Доказать, что $H_n = ln n + gamma + 1/(2n) + O(1/n^2)$ (указание $integral_1^n = integral_1^(+oo) - integral_n^(+oo)$)
+3. Формула Стирлинга
+$ln n! = sum_(k=1)^n ln k$ \
+$f(x) = ln x, m = 1, f``(x) = -1/x^2$ \
+$ln n! = (ln 1 + ln n)/2 + integral_1^n ln x d x - underbrace(integral_1^n ({x}(1-{x}))/x^2 d x, b_n :=)$ \
+$integral_1^n ln x d x = n ln n - n + 1$ \
+$b_(n+1) > b_n$ и $0 < b_n < integral_1^n (1/4)/(x^2) d x = - 1/(4x) |_1^n = 1/4 - 1/(4n) < 1/4$, тогда существует предел $lim b_n =: b$ и $b_n = b + o(1)$ \
+$ln n! = n ln n - n + 1/2 ln n + (1-b) + o(1)$ при $n-> oo$ \
+$n! = n^n e^(-n) sqrt(n) e^(1-b)underbrace(e^(o(1)), 1+o(1) ) = n^n e^n sqrt(n) C(1+o(1)) tilde C n^n e^(-n) sqrt(n)$ \
+Найдем $C$ \
+$ 4^n/(sqrt(pi n)) tilde C_(2n)^n = (2n)!/(n!)^2 tilde (C(2n)^(2n) e^(-2n) sqrt(2n))/(C n^n e^(-n) sqrt(n))^2 = (C dot 2^(2n) sqrt(2n))/(C^2 sqrt(n) sqrt(n))$ \
+$4^n/sqrt(pi n) tilde (2^(2n) sqrt(2))/(C sqrt(n)) => C equiv (2^(2n) sqrt(n))/(sqrt(n)) dot sqrt(pi n)/4^n = sqrt(2 pi) => C = sqrt(2 pi)$ \
+Формула Стирлинга $n! equiv n^n e^(-n) sqrt(2 pi n)$ \
+== Упражнение
+Доказать, что $n! = n^n e^(-n) sqrt(2 pi n) (1 + O(1/n))$
+= Несобственные интегралы
+== Определение
+$-oo < a < b <= +oo, f in C[a,b)$ \
+Если существует $lim_(B->b-) integral_a^B f$, то он называется несобственный интегралом $integral_a^(->b) f$ \
+$integral_a^(->b) f := lim_(B->b-) integral_a^B f$ 
+== Определение
+аналогично для предела справа
+== Определение
+Несобственный интеграл $integral_(->a)^b$ или $integral_a^(->b)$ называется сходящися, если соответствующий предел существуеют и конечен, в противном случае расходящийся
+== Замечание
+Если $f in C[a,b]$, то $integral_a^(->b) f = integral_a^b f$ \
+$abs(integral_a^b f - integral_a^B f) = abs(integral_B^b f) <= integral_B^b abs(f) <= integral_B^b M = (b-B) dot M ->_(B->b-) 0$ \
+== Примеры 1
+$integral_1^(+oo) (d x)/x^p = lim_(y->+oo) integral_1^y (d x)/x^p = 1/(p-1) - lim_(y->+oo) 1/((p-1)y^(p-1)) = 0$ при $p>1$ и $-oo$ при $p<1$ \
+Если $p != 1$, то $integral_1^y (d x)/x^p = -1/x^(p-1) dot 1/(p-1) |_(x=1)^(x=y) = 1/(p-1) - 1/((p-1) y^(p-1))$ \
+То есть интеграл сходится при $p>1$ и равен $1/(p-1)$ и расходится при $p<1$ \
+Если $p=1$ $integral_1^(+oo) (d x)/x = lim_(y->+oo) integral_1^y (d x)/x = lim_(y->+oo) ln y = + oo$ \
+2.
+$integral_0^1 (d x)/x^p = lim_(y->0+) integral_y^1 (d x)/x^p =_(p!=1) 1/(1-p) - lim_(y->0+) 1/((1-p) y^(p-1))$ этот предел $=0$ при $p < 1$ и $-oo$ при $p>1$ \
+$integral_0^1 (d x)/x = lim_(y->+oo) integral_y^1 (d x)/x = lim_(y->0+) ln x |_y^1 = - lim_(y->0+) ln y = + oo$ \
+при $p < 1$ интеграл сходится и равен $1/(1-p)$ \
+при $p>= 1$ интеграл расходится и равен $+oo$
+== Критерий Коши 
+$f in C[a, b)$ и следующие условия равносильны: 
+1. $integral_a^(-> b)$ сходится
+2. $forall epsilon > 0: exists c in (a,b): forall A, B in (c, b)  abs(integral_A^B f) < epsilon$
+Симметрично для нижнего 
+=== Доказательство
+$F(y):= integral_a^y f$ \
+$integral_a^(->b) f$ - сходится $<=> lim_(y->b-) F(y)$ существует и конечен $<=>$(критерий Коши для $F$)  \
+$b = +oo$ $forall epsilon > 0: exists E: forall A, B > E => abs(F(B) - F(A)) < epsilon, F(B) - F(A) = integral_A^B f$ \
+$b < + oo$ $forall epsilon > 0: exists delta > 0: forall A, B in (b-delta, b) => abs(F(B) - F(A)) < epsilon$ \
+В первом случае $c$ это $E$, во втором $b-delta$ это $c$
+==== Замечение
+$integral_a^b$ сходится $<=>$ существует $lim_(B->b-) F(B) - F(a)$, где $F$ - первообразная $f$ и $integral_a^(->b) f = lim_(B->b-) F(B) - F(a)$ \
+$integral_a^(->b) f = lim_(B-> b-) integral_a^B f = lim_(B->b-) (F(B) - F(a))$ \
+== Свойства несобственных интегралов
+1. Аддитивность $f in C[a,b), c in (a,b)$ Тогда $integral_a^(->b) f$ - сходится $<=> integral_c^(->b) f$ сходится и в этом случае есть формула $integral_a^(->b) f = integral_a^c f + integral_c^(->b)f$ \ Доказательство $F$ - первообразная $f$. Тогда $integral_a^(->b) f$  сходится $<=>$ существует конечный $lim_(B->b-) F(B) <=> integral_c^(->b) f$ - сходится. \ $integral_a^(->b) = lim_(B->b-) F(B) - F(a) = lim_(B->b-) F(B) - F(c) + (F(c) - F(a))$
+2. Если $integral_a^(->b) f$ сходится, то $lim_(y->b-) integral_y^(->b) f = 0$ \ Доказательство $integral_a^(->b) f = integral_1^(y) + integral_y^(->b) f$ \
+3. Линейность $f, g in C[a,b), alpha, beta in RR$. Тогда $integral_a^(->b) (alpha f + beta g) = alpha integral_a^(->b) f + beta integral_a^(->b) g$ \ Доказательство $F, G$ - первообразные $f, g$ \ $integral_a^(->b) f = lim_(y->b-) F(y) - F(a)$ и $integral_a^(->b) g = lim_(y->b-) G(y) - G(a)$ \ $alpha integral_a^(->b) f + beta integral_a^(->b) g = lim_(y->b-) (alpha F(y) + beta G(y)) - (alpha F(a) + beta G(a)) = integral_a^(->b) (alpha f + beta g)$ \
+==== Замечание
+Если $integral_a^(->b) f$ сходится, а $integral_a^(->b) g$ расходится, то $integral_a^(->b) (f+g)$ расходится, от проитвного $g = (f + g) - f$
