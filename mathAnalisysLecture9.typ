@@ -430,4 +430,148 @@ $integral_a^(->b) f = lim_(B-> b-) integral_a^B f = lim_(B->b-) (F(B) - F(a))$ \
 2. Если $integral_a^(->b) f$ сходится, то $lim_(y->b-) integral_y^(->b) f = 0$ \ Доказательство $integral_a^(->b) f = integral_1^(y) + integral_y^(->b) f$ \
 3. Линейность $f, g in C[a,b), alpha, beta in RR$. Тогда $integral_a^(->b) (alpha f + beta g) = alpha integral_a^(->b) f + beta integral_a^(->b) g$ \ Доказательство $F, G$ - первообразные $f, g$ \ $integral_a^(->b) f = lim_(y->b-) F(y) - F(a)$ и $integral_a^(->b) g = lim_(y->b-) G(y) - G(a)$ \ $alpha integral_a^(->b) f + beta integral_a^(->b) g = lim_(y->b-) (alpha F(y) + beta G(y)) - (alpha F(a) + beta G(a)) = integral_a^(->b) (alpha f + beta g)$ \
 ==== Замечание
-Если $integral_a^(->b) f$ сходится, а $integral_a^(->b) g$ расходится, то $integral_a^(->b) (f+g)$ расходится, от проитвного $g = (f + g) - f$
+Если $integral_a^(->b) f$ сходится, а $integral_a^(->b) g$ расходится, то $integral_a^(->b) (f+g)$ расходится, от противного $g = (f + g) - f$
+
+== Монотонность
+$f, g in C[a,b)$ и $f <= g $ на $[a,b)$ \
+Тогда $integral_a^(->b) f <= integral_a^(->b) g$ если эти несобственные интегралы определены \
+=== Доказательство
+$integral_a^y <= f_a^y g$ при $a < y < b$ \
+$integral_a^b f <= integral_a^b g$ и предельный переход в неравенстве
+== Формула интеграрования по частям
+$f, g in C^1 [a,b)$ \
+Тогда $integral_a^(->b) f g` = f g |_a^b - integral_a^(->b) f` g$ \
+(если существуют 2 из трех пределов, то существует третий и верно равенство) \
+=== Доказательство
+$integral_a^y f g` = f g |_a^y - integral_a^y f` g$ при $a < y < b$ \
+== Теорема  (формула замены переменной в несобственном интеграле)
+$phi : [alpha, beta) -> [a,b), phi in C^1 [alpha, beta), f in C[a,b)$, $c:= lim_(gamma -> beta-) phi(gamma)$ \
+Тогда $integral_alpha^beta f(phi(t)) phi`(t) d t = integral_phi(alpha)^c f(x) d x$  (если один из двух интегралов существует, то существует второй и они равны)
+=== Доказательство
+$F(y):= integral_(phi(alpha))^y f(x) d x, Phi(gamma) := integral_alpha^gamma f(phi(t)) phi`(t) d t$ \
+$Phi(gamma) = F (phi(gamma))$
+==== Простой случай (1 существует)
+то есть существует $lim_(y->c-) F(y)$ \
+Возьмем $gamma_n $ возрастает к $beta, Phi(y_n) = F(phi(gamma_n)) -> lim_(y->c-) F(y) = integral_phi(alpha)^c f(x) d x$ \
+$phi(gamma_n) -> c$ из определения по Гейне (x) \
+$Phi(gamma_n) = F(phi(gamma_n)) -> lim_(y->c-) F(y) = integral_phi(alpha)^c f(x) d x$ \
+то есть поняли, что $lim_(gamma -> beta-) Phi(gamma)$ существует и равен $integral_phi(x)^c f(x) d x$ \
+==== Сложный случай (2 существует)
+то есть $lim_(gamma -> beta-) Phi(gamma)$ \
+Если $c < b$, то тогда существует и 1. т.к. $f$ непрерывна на $[phi(alpha),c]$ \
+Можно считать, что $c=b$ \
+Возьмем какую-нибудь последовательность $b_n$ возрастающую и стремащуюся $b$ \
+Хотим доказать, что $lim F(b_n)$ существует \
+между $b_n$ и $b$ есть значения $phi$ в некоторых точках $phi(beta_n)$ \
+$phi(alpha) < b_n phi(beta_n) => phi$ принимает значение $b_n$ в некоторых точках, лежащей между $alpha$ и $beta_n$ назовем это точку $gamma_n$ \
+$b_n = phi(gamma_n), F(b_n) = F(phi(gamma_n)) = Phi(gamma_n)$ \
+Осталось проверить, что $gamma_n -> beta$ От противного. Пусть нет стремления (это апатия) возьмем подпоследовательность $gamma_n_k -> beta_* < beta => phi(gamma_n_k) -> phi(beta_*)$, так как $phi$ непрерывна в $beta_*$, но $phi(gamma_n_k) = b_n_k -> b$, но $phi(beta_*) < b$ противоречие \
+$F(b_n) = Phi(gamma_n) -> 2$
+=== Замечание
+$a < b < +oo, f in C[a,b)$ \
+$integral_a^b f(x) d x$ \
+$phi(t) = b - 1/t, lim_(t->+oo) phi(t) = b$ \
+$phi(1/(b-a)) = 0$ \
+$integral_a^b f(x) = integral_(1/(b-a))^(+oo) f(b-1/t)dot 1/t^2 d t$
+
+==
+Рассмотрим случай, когда $f >= 0$. \
+Тогда $F(y):= integral_a^y f(x) d x$ - возрастающая функция \
+Если $y < z$, то $F(z) = integral_a^z f = integral_a^y + integral_y^z f = F(y) + underbrace(integral_y^z f, >= 0) >= F(y)$ \
+то есть мы поняли, что если $f in C[a,b)$ и $f>= 0$, то $integral_a^b f$ всегда существет (но возможно $+oo$) \
+== Теорема
+$f in C[a,b)$ и $f >= 0$, $F(y):= integral_a^y f$ \
+Тогда $integral_a^b f$ - сходится $<=>$ $F$ ограничена (сверху) \
+=== Доказательство
+$=>$ $integral_a^b f$ - сходится $=> exists$ конечный $lim_(y-> b-) integral_a^y f = lim_(y->b-) F(y)$ \
+но $lim_(y->b-) F(y) = sup_(y in[a,b)) F(y) => F$ ограничена сверху \
+$arrow.double.l$ $F$ ограничена и возрастает $=> exists$ конечный $lim_(y -> b-) F(y)$, но это и есть $integral_a^b f$ \
+== Следствие (признак сравнения)
+$0 <= f <= g, f,h in C[a,b)$ \
+Тогда 
++ если $integral_a^b g$ сходится, то $integral_a^b f$ тоже сходится, 
++ если $integral_a^b f$ расходится, то $integral_a^b g$ тоже расходится \
+=== Доказательство
+1) Пусть $F(y) := integral_a^y f, G(y):= integral_a^y g => F <= G$ во всех точках \
+$integral_a^b g$ - сходится $<=> G$ - ограничена сверху $=> F$ - ограничена сверху $<=> integral_a^b f$ - сходится \
+2) от противного $integral_a^b g$ - сходится $=> integral_a^b f$ сходится от противного
+=== Замечание 1
+Достаточно выполнения неравенства $0 <= f <= g$ лишь в некоторой окрестности точки $b$  \
+=== Замечание 2
+неравенство $f <= g$ можно заменить на $f = O(g)$, то есть $f <= C dot g$
+=== Замечание 3
+Если $f >= 0$ и $f = O(1/x^(1+epsilon))$ при некотором $epsilon > 0$, то $integral_a^(+oo) f$ - сходится
+== Следствие 
+$f, g in C[a,b), f ,g >= 0$ Если $f tilde_(x->b-) g$, то  $integral_a^b f$ и $integral_a^b g$ ведут себя одинаково (то есть либо оба сходятся, либо оба расходятся) \
+=== Доказательство
+$f equiv g$ $=> f = phi dot g, lim_(x-> b-) phi(x) = 1 => 1/2 < phi(x) < 2$ в некоторой окрестности точки $b => $ в этой окрестности $f <= 2g$ и $g <= 2 f$ и признак сравнения
+=== Замечание
+$f >= 0$ и $integral_1^(+oo) f$ - сходится $arrow.double.not lim_(x-> + oo) f(x) = 0$
+== Определение
+$f in C[a,b)$ интеграл $integral_a^b j$ абсолютно сходится, если $integral_a^b abs(f)$ сходится 
+== Теорема
+$f in C[a,b)$. Если $integral_a^b f$ абсолютно сходится, то он сходится 
+=== Доказательство
+$f_+ = max{f, 0}, f_- max{-f ,0}, f = f_+ - f_-, abs(f) = f_+ + f_-$ \
+В частности $0 <= f_plus.minus <= abs(f)$ \
+из признака сравнение $integral_a^b f_plus.minus$ - сходится $=> integral_a^b f = integral_a^b (f_+ - f_-)$ сходится 
+== Признак Дирихле
+$f, g in C[a, +oo)$ \
+Тогда если:
++ $integral_a^b f =: F(y)$ - ограниченная функция
++ $g$ - монотонная функция
++ $lim_(x->+oo) g(x) = 0$
+Если эти три условия выполнены, то тогда интеграл $integral_a^(+oo) f g$ - сходящийся 
+=== Доказательство
+Доказательство для случая $g in C^1[1; +oo)$ \
+$integral_a^y f g = integral_a^y F`g = F g |_a^y - integral_a^y F g`$ \
+Надо доказать, что $integral_a^y f g$ имеет конечный предел при $y->+oo$ \
+$F g |_a^y = F(y) g(y) - underbrace(F(a) g(a), = 0) ->_(y->+oo) 0$ $F$ - ограниченная $g$ - бесконечно малая $=> F g$  бесконечно малая \
+Осталось понять, что существует конечный $lim_(y->+oo) integral_a^y F g`$, то есть xnj $integral_a^(+oo) F g`$ сходится \
+проверм, абсолютную сходимость $integral_a^(+oo) abs(F g`)$, $F$ - ограниченная функция $=> abs(F) <= M$ \
+$integral_a^y abs(F g`) <= M integral_a^y abs(g`)$, $g$ монотонная $=> g`$ знакопостоянна, тогда получается, что $M integral_a^y abs(g`) = M abs(integral_a^y g`) = M abs(g(y) - g(a)) ->_(y->+oo) M abs(g(a))$ \ 
+$=> integral_a^(+oo) M abs(g`)$ - сходится $=> integral_a^(+oo) abs(F g`)$ - сходится $=> integral_a^(+oo) F g`$ - сходится
+== Признак Абеля
+$f,g in C[a,+oo)$  \
+Тогда если 
++ $integral_a^(+oo) f$ сходится, 
++ $g$ монотонная, 
++ $g$ ограничена
+то $integral_a^(+oo) f g$ - сходится 
+=== Доказательство
+$g$ монотона и ограничена, значит есть конечный предел $lim_(y->+oo) g(y) =: l in RR$ \
+$overline(g(y)) := g(y) - l$ - монотонна и $->_(y->+oo) 0$ \
+$F(y) := integral_a^y f$ имеет конечный предел при $y->+oo$ \
+$=>$ при $y > y_*$ $F(y)$ близко к этому $lim$ и, в частности, ограничена на $[a, y_*]$ $F$ ограничена, так как это непрервыная функция, значит $F$ - ограничена \
+то есть функии $f$ и $overline(g)$ подходят под условия принципа Дирихле $=> integral_a^(+oo) f overline(g)$ - сходится \
+$integral_a^(+oo) f g = integral_a^(+oo) f (overline(g) + l) = l integral_a^(+oo) f + integral_a^(+oo) f overline(g)$ - первое сходится по условия, второе доказали, что сходится \
+== Замечание
+пусть $f$ непрерывна с периодом $T$ \
+Тогда $integral_a^(a+T) f = integral_b^(b+T) f$ \
+=== Доказательство
+$integral_b^(b+T) f(t) d t = integral_b^(b+T, =s) f(underbrace(t + T, =s)) d t = integral_(b+T)^(b+2T) f(s) d s$ \ \
+$integral_a^(a+T) f = integral_a^b f + integral_b^(a+t) f = integral_(a+T)^(b+T) f + integral_b^(a+T) f = integral_b^(b+T) f$ \
+$integral_a^b f = integral_a^b f(t + T) d t = integral_(a+T)^(b+T) f(s) d s$
+== Замечание
+$f$ непрерывна и периодична $=> f$  ограничена \
+$T$ - периодична $=>$ все свои значения $f$ принимает на отрезке $[0, T]$, а там она ограничена по т. Вейерштрасса
+== Следствие пр. Дирихле
+$f in C[a,+oo)$, периодична с периодом $T$, $g in C[a,+oo)$ монотонна и $lim_(x->+oo) g(x) = 0$. Тогда \
++ если $integral_a^(+oo) abs(g)$ сходится,то $integral_a^(+oo) abs(f g)$ сходится \
++ Если $integral_a^(+oo) g$ - расходится, то $integral_a^(+oo)f g$ - сходится $<=> integral_a^(a+T) f = 0$ \
+=== Доказательство
+1) $f$ непрерывна и периодична $=> $ ограничена $=> abs(f) <= M => abs(f g) <= M abs(g)$ и пр. сравнения \
+2) $arrow.double.l$ $integral_a^(a+T) f = 0 => F(y) := integral_a^y f$ - периодична \
+$F(y+T) = integral_a^(y+T) f = integral_a^y f + underbrace(integral_y^(y+T) f, =0) = integral_a^y f = F(y) => F$ -периодична и непрерывна $=> F$  ограничена \
+все условия принципа Дирихле выполнены $=> integral_a^(+oo) f g$ сходятся \
+$=>$ \
+От противного пусть $K:= integral_a^(a+T) f != 0$ \
+$overline(f)(x) := f(x) - K/T$ - периодична \
+$integral_a^(a+T) overline(f) = 0 => integral_a^(+oo) overline(f) g$ - сходится \ 
+$integral_a^(+oo) f g = underbrace(integral_a^(+oo) overline(f) g, "сходится") + K/T underbrace(integral_a^(+oo) g, "расходится")$ \
+=== Пример
+$integral_1^(+oo) (sin x)/x^p d x$ \
+1. $p > 1$ $abs((sin x)/x^p) <= 1/x^p$ и $integral_1^(+oo) (d x)/(x^p)$ - сходится $=> (*)$ сходится 
+2. $0 < p <= 1$ $integral_0^(2 pi) sin x d x = 0, 1/x^p$ монотонно убывает и стремится к $0$, тогда второе следствие говорит, что интеграл сходящийся \
+  $integral_0^(2pi) abs(sin x) d x = 4 1/x^p$ монотонно убывает и стремится к 0 и $integral_1^(+oo) (d x)/(x^p)$ - расходится 
+3. $p<=0$ нет сходимости \ $integral_(pi/6 + 2 pi k)^((5pi)/6 + 2 pi k) (sin x)/x^p  d x >= 1/2 integral_(pi/6 + 2pi k)^((5pi)/6 + 2pi k) (d x)/(x^p) >= 1/2 ((5pi)/6 - pi/6) = pi/3$ - противоречит критерию Коши
