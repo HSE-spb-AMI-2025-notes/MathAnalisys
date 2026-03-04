@@ -640,7 +640,7 @@ $"Int" [-1,1] = (-1,1)$
 + Доказать, что $"Int" (A union B) != "Int" A union "Int" B$
 
 == Определение
-$A$ - замкнутое множество, если $x \ A$ - открытое
+$A$ - замкнутое множество, если $x \\ A$ - открытое
 == Теореме (свойства замкнутых множеств)
 + $emptyset, X$ - замкнутое
 + Пересечение любого количества замкнутых - замкнуто
@@ -703,3 +703,281 @@ $A$ - множество. Следующие условия равносильн
   + $a in.not A$ и $circle(B)_r (a) inter A != emptyset$
 2. Очевидно
 3. $A$ - замкнуто $<=> A = "Cl" A <=> A = A union A` <=> A` subset A$
+
+== Определение Подпространство Метрического пространства
+$(X, phi)$ - метрическое пространствоб $Y subset X, Y != emptyset$\
+$(Y, phi|_(Y times Y))$ - подпространство
+=== Замечание
+$B_r^X (a) = {x in X: phi(x, a) < r}$ \
+$B_r^Y (a) = {x in Y: phi(x, a) < r}$ \
+$B_r^Y (a) = B_r^X (a) inter Y$ \
+
+== Теорема
+$Y subset X, (X, phi)$ - метрическое пространство. Тогда
++ $U subset Y$ открыто в $(Y, phi) <=>$ существует $G subset X$ открытое в $(X, phi)$, такое что $U = Y inter G$
++ $A subset Y$ замкнуто в $(Y, phi) <=> $ сущетсвует $F subset X$ замкнутое в $(X, phi)$, такое что $A = Y inter F$
+=== Доказательстсво
+1.
+"$=>$" $U subset Y$ открыто в $(Y, phi)$ \
+$forall a in U$ найдетса $r_a > 0$, такое что $B^Y_r_a subset U$ \
+$=> U = union.big_(a in U) B^Y_r_a (a) = union.big_(a in U) (B^X_r_a (a) inter Y) = Y inter union.big_(a in U) B^X_r_a (a) =: G$ - открытое в $X$ \
+"$arrow.double.l$" $G$ - октрытое в $(X, phi)$ $Y = G inter Y$ \
+Возьмем $a in U subset G =>$ найдется $r > 0$, такое что $B^X_r (a) subset G => B^Y_r (a) = Y inter B^X_r (a) subset Y inter G = U =>$ $a$ - внутрення точка $U => U$ - открыто в $(Y, phi)$
+2.
+$A subset Y$ замкнуто в $(Y, phi) <=> Y \\ A$ открыто в $(Y, phi)$ \
+$<=>_"п.1"$ существует  $G$ - открытое в $(X, phi)$, такое что $Y \\ A = Y inter G$, то есть $A = Y inter (X \\ G)$ \
+$G$ - октрытое в $(X, phi) <=> X \\ G$ - замкнуто в $(X, phi) <=> A = Y inter G$ для некоторого $F subset X$ замкнутого в $(X, phi)$ 
+=== Пример
+$X = RR, phi(x,y) = abs(x-y), Y = [0,3)$ \
+$U = [0,1)$ - открытоe в $Y$ \
+$A = [2,3)$ - замкнутоe в $Y$ \
++ $[0,1) = Y inter (-1,1)$ 
++ $[2,3) = Y inter [2,4]$
+== Определение
+$X$ - векторное пространство (над $RR$) \
+$parallel dot parallel$ - норма в $X$, если
++ $parallel x parallel >= 0: forall x in X$ и $abs(abs(x)) = 0 <=> x = arrow(x)$
++ $abs(abs(alpha x)) = abs(alpha) dot abs(abs(x)) forall alpha in RR and forall x in X$
++ неравенство треугольника $abs(abs(x + y)) < abs(abs(x)) + abs(abs(y)), forall x, y in X$
+=== Примеры
++ $X = RR$, $abs(abs(x)) = abs(x)$ - норма
++ $X = RR^d, p >= 1$ $abs(abs(x))_p := (abs(x_1)^p + abs(x_2)^p + dots + abs(x_d)^p)^(1/p)$  - норма. Неравенство треугольника это неравенство Минковского
++ $x = RR^d, abs(abs(x))_oo := max{abs(x_1), abs(x_2), dots, abs(x_d)}$ - норма
++ $X = C[a,b], abs(abs(f)):= max_(a in [a,b]) abs(f(x))$ - норма
++ $X = C[a,b], abs(abs(f)) := integral_a^b abs(f(x)) d x$ - норма
+
+== Определение
+$X$ - векторное пространство (над $RR$) \
+$chevron dot, dot chevron.r$ - скалярное произведение, если $chevron dot, dot chevron.r: X times X -> RR$
++ $chevron x, x chevron.r >= 0$ $forall x in X$ и $chevron x, x chevron.r = 0 <=> x = arrow(0)$
++ $chevron x + y, z chevron.r = chevron x, z chevron.r + chevron y, z chevron.r$ $forall x, y ,z in X$
++ $chevron alpha x, y chevron.r = alpha chevron x, y chevron.r$ $forall alpha in RR, forall x, y in X$
++ $chevron x, y chevron.r = chevron y , x chevron.r$ $forall x, y in X$
+=== Примеры
+1. $X = RR^d, chevron x, y chevron.r = x_1 y_1 + x_2 y_2 + dots + x_d y_d$
+2. $X = RR^d, w_1, w_2, dots w_d > 0$, тогда $chevron x, y chevron.r := w_1 x_1 y_1 + w_2 x_2 y_2 + dots + w_d x_d y_d$
+3. $X = C[a,b], chevron f, g chevron.r = integral_a^b f g$ - скалярное произведение
+
+== Свойства 
+1. Неравнество Коши-Буняковского $chevron x, y chevron.r^2 <= chevron x, x chevron.r dot chevron y, y chevron.r$
+=== Доказательство
+$t in RR, f(t):= chevron x + t y , x + t y chevron.r >= 0$ \
+$chevron x + t y, x + t y chevron.r = chevron x, x + t y chevron.r + t dot chevron y, x + t y chevron.r = chevron x, x chevron.r + t chevron x, y chevron.r + t chevron y, x chevron.r + t^2 chevron(y, y) = chevron x, x chevron.r + 2t chevron x,y chevron.r + t^2 chevron y, y chevron.r$, если $y = 0$, то доказательство неравенства очевидно, так как $chevron x, y chevron.r = 0$
+$=>$ дискриминант $<= 0, D:= (2chevron x, y chevron.r)^2 - 4 chevron x, x chevron.r chevron y, y chevron.r = 4(chevron x,y chevron.r^2 - chevron x, x chevron.r dot chevron y, y chevron.r)$
+2. $abs(abs(x)):= sqrt(chevron x"," x chevron.r )$- норма
+=== Доказательство
+$abs(abs(x)) >=0$ очевидна $abs(abs(x)) = 0 <=> chevron x, x chevron.r = 0 <=> arrow(0)$ \
+$abs(abs(alpha x)) = sqrt( chevron alpha x ", " alpha x chevron.r) = sqrt( alpha^2 chevron x "," x chevron.r) = abs(alpha) ...$\
+
+Неравенство треугольника \
+$abs(abs(x + y)) <= abs(abs(x)) + abs(abs(y))$ \
+$sqrt( chevron x +y "," x + y chevron.r) <= sqrt(chevron x"," x chevron.r) + sqrt(chevron y "," y chevron.r)$
+
+3. $abs(abs(abs(x))- abs(abs(y))) <= abs(abs(x-y))$ $forall x ,y in X$
+=== Доказательство
+$abs(abs(x)) - abs(abs(y)) <= abs(abs(x-y)) arrow.double.l abs(abs(x)) = abs(abs(y + (x-y))) <= abs(abs(y)) + abs(abs(x-y))$ \
+$abs(abs(y)) - abs(abs(x)) <= abs(abs(x-y)) arrow.double.l abs(abs(y)) = abs(abs(x + (y-x))) <= abs(abs(x)) + abs(abs(y-x)) = abs(abs(x)) + abs(abs(x-y))$, так как $abs(abs(-z)) = abs(-1) abs(abs(z)) = abs(abs(z))$
+
+4. Если $abs(abs(x))$ - норма, то $phi(x,y):= abs(abs(x-y))$ - матрика
+=== Доказательство
+$rho(x, y) >= 0, $ если $0 = (x,y) = abs(abs(x-y)) <=> x-y = arrow(0) <=> x = y$ \
+$rho(x,y) = rho(y,x)$, так как $abs(abs(x-y)) = abs(abs(y-x))$ \
+$rho(x,z) <= rho(x,y) + rho(y,z)$ \
+$abs(abs(x-z)) = abs(abs((x-y) + (y-z))) <= abs(abs(x-y)) + abs(abs(y-z)) = rho(x,y) + rho(y,z)$
+
+== Упражнение
+Доказать, что норма пораждается некоторым скалярным произведением $<=> abs(abs(x+y))^2 + abs(abs(x-y))^2 = 2 abs(abs(x))^2 + 2 abs(abs(y))^2$ $forall x, y in X$
+== Определение
+$(X, rho)$ - метрическое пространство, $x_1, x_2, dots in X, a in X$ \
+$a = lim x_n,$ если $forall epsilon > 0: exists N: forall n >= N, rho(x_n,a) < epsilon$ \
+Альтернативное определение \
+$a = lim x_n$, если вне любого открытого шара с центром в $a$ находится лишь конечное число членов последовательности
+
+=== Свойства перделов
++ $a = lim x_n <=> rho(x_n, a) ->_(n->oo) 0$
++ Предел единственный. То есть если $a = lim x_n$ и $b = lim x_n$, то $a = b$. Пусть $a != b$, возьмем такое $r>0$, что $B_r (a) inter B_r (b) = emptyset$. Вне каждого из этих шариков лежит лишь конечное число членов последовательности, значит всего в последовательности лишь конечное число членов, так быть не может
++ Если $a = lim x_n$, то любая перестановка последовательности $x_n$ имеет тот же самый предел. $a = lim x_n <=> rho(x_n, a) -> 0$ а этой штуке пофигу на то, что мы переставляем, она тефлоновая #emoji.face.cool
++ Если $a = lim x_n$ и каждый члено последовательности рамзножили в конечном количество, то предел стремится к $a$
++ Если $a = lim x_n$ и выкинули конечное число членов последовательности, то предел не изменился
++ Если $a = lim x_n$ и к последовательности добавили конечное число членов, то новая последовательность стремится к $a$
+== Определение
+$A subset X$ - ограниченое, если оно содержится в некотором шаре
+=== Упражнене
+$B_r (a) subset B_R (b)$, где $R = r + rho(a,b)$
+
+7. Если последовательность имеет предел, то она ограничена. Доказательство $a = lim x_n$, возьмем $epsilon = 1, exists N: forall n >= N: phi(x_n, a) < 1,$ то есть $x_N, x_(N+1), dots in B_1 (a)$ \ $R := max{rho(a,x_1), rho(a,x_2) dots rho(a,x_(N-1))} + 1 => x_n in B_R (a)$
+
+== Теорема об арифметических действиях с пределами
+$X$ - векторное пространство \
+$abs(abs(dot))$ - норма $X, a = lim x_n$, $b = lim y_n$, $lambda_n in RR$ и $lambda = lim lambda_n$. Тогда
++ $lim (x_n plus.minus y_n) = a plus.minus b$
++ $lim lambda_n x_n = lambda a$
++ $lim abs(abs(x_n)) = abs(abs(a))$
++ Если в $X$ есть скаляное произведение, то $lim chevron x_n, y_n chevron.r = chevron a, b chevron.r$
+=== Доказательство
+$a = lim x_n <=> lim abs(abs(x_n - a)) = 0$
++ $rho(x_n + y_n, a + b) = abs(abs((x_n + y_n) - (a + b))) = abs(abs((x_n - a) + (y_n - b))) <= abs(abs(x_n - a)) + abs(abs(y_n - b)) -> 0$
++ $rho(lambda_n x_n, lambda a) = abs(abs(lambda_n x_n - lambda a)) = abs(abs(lambda_n x_n - lambda_n a + lambda_n a - lambda a))<= abs(abs(lambda_n x_n - lambda_n a)) + abs(abs(lambda_n a - lambda a)) = underbrace(abs(lambda_n), "ограниченная") abs(abs(x_n - a)) + abs(lambda_n - lambda) abs(abs(a)) -> 0$
++ $abs( abs(abs(x_n)) - abs(abs(a))) <= abs(abs(x_n - a)) -> 0$
++ $abs(chevron x_n"," y_n chevron.r - chevron a"," b chevron.r)<= abs( chevron x_n"," y_n chevron.r - chevron x_n "," b chevron.r) + abs(chevron x_n "," b chevron.r - chevron a "," b chevron.r) = abs(chevron x_n "," y_n-b chevron.r) + abs(chevron x_n - a"," b chevron.r) $ \ $abs(chevron x_n "," y_n - b chevron.r) <= sqrt(chevron x_n "," x_n chevron.r) sqrt(chevron y_n - b"," y_n - b chevron.r ) = abs(abs(x_n)) dot abs(abs(y_n - b)) -> 0$ \ $abs(chevron x_n + a "," b chevron.r) <+ abs(abs(x_n - a)) abs(abs(b))$ 
+
+== Определение
+$RR^d, x = (x^((1)), x^((2)), dots , x^((d)))$ \
+$x_n$ последовательность векторов в $RR^d$ покоординатно сходится к $a = (a^((1)), a^((2)), dots a^((d)))$ если $lim x_n^((1)) = a^((1)), dots, lim x_n^((d)) = a^((d))$
+
+== Теорема 
+$x_n, a in RR^d$ Тогда \
+$x_n$ покоординато сходится к $a <=> abs(abs(x_n - a)) -> 0$ (имеем в виду классическое расстояние) \
+(то есть покоординатная сходимость и сходимость по норме это одно и то же)
+=== Доказательство
+"$=>$" $x_n$ - поокоординатно сходится к $a => abs(x_n^((i)) - a^((i))) -> 0 forall j in 1,2, dots, d$ \
+$abs(abs(x_n - a)) = sqrt((x_n^((1)) - a^((1)))^2 + dots + (x_n^((d)) - a^((d)))^2) <= abs(x_n^((1)) - a^((1))) + dots + abs(x_n^((d)) - a^((d))) => abs(abs(x_n - a)) -> 0$ \
+"$arrow.double.l$" $abs(abs(x_n - a)) -> 0$ \
+$abs(x_n^((j)) - a^((j))) <= sqrt((x_n^((1)) - a^((1)))^2 + dots  (x_n^((d)) - a^((d)))^2) = abs(abs(x_n - a)) -> 0$
+== Определение
+$(X, rho)$ - метрическое простраснтво $x_n in X$ \
+$x_n$ - фундаментальная последовательность, если $forall epsilon > 0: exists N: forall m,n >= N, rho(x_n, x_m) < epsilon$
+=== Свойства
++ Если последовательность имее предел, то он фундаментальна
++ Фундаментальная последовательность ограничена
++ Если последовательность фундаментальна и у нее есть подпоследовательность, стремящаяся к $a$, то сама последовательность стремится к $a$
+=== Доказательство
++ Пусть $lim x_n = a$ Возьмем $epsilon > 0$ и по нему $N$, такое что \ $forall n >= N$ $rho(x_n ,a) epsilon/2$ \ $forall m, n >= n: rho(x_n, x_m) <= rho(x_n, a) + rho(a, x_m) < epsilon/2 + epsilon/2 = epsilon$
++ $x_n$ - фундаментальная подпоследовательность. Возьмем $epsilon = 1$. Найдется $N$, такое что $forall m, n >= N, rho(x_n, x_m) < 1$ \ $=> rho(x_n, x_N) < 1$ при $n >= N => x_n in B_1 (x_N)$ при $n >= N$ \ Возьмем $R:= max{rho(x_1, x_N), dots, rho(x_(N-1), x_N)} + 1 => x_n in B_R (x_N) forall n$ 
++ $x_n$ - фундаментальная последовательность $x_n_k -> a$. Докажем, что $x_n$ - стремится к $a$ \ $forall epsilon > 0: exists N: forall m,n >= N$ $rho(x_n, x_m) < epsilon$ \ $forall epsilon > 0: exists K :forall k >= K rho(x_n_k, a) < epsilon$ \ Возьмем $n >= N$ и докажем, что $rho(x_n, a) < 2 epsilon$ \ Выберем $k = max{K, N}$ тогда $n_k >= N => rho(x_n, x_n_k) < epsilon$ и $rho(x_n_k, a) < epsilon$ $=> rho(x_n, a) <= rho(x_n, a) < 2 epsilon$ 
+== Определение
+$(X, rho)$ - метрическое пространство. Полно если любая фундаментальная последовательность имеет предел. \
+=== Замечание 
+Знаем, что $RR$ - полное
+== Теорема $RR^d$ - полное пространство
+=== Доказательство:
+$x_n$ - фундаментальная последовательность в $RR^d$ \
+$rho(x_n, x_n) = sqrt((x_n^((1)) - x_m^((1)))^2 + dots + (x_n^((d)) - x_m^((d)))^2) >= abs(x_n^((1)) - x_m^((1)))$ \
+Числовая последовательность $x_1^((1)), x_2^((2)) dots$ фундаментальная $=>^"кр. Коши"$ существует $a^((i)) in RR$ \
+т.ч $lim_(n->oo) x_n^((i)) = a^((i)) => x_n$ покоординатно сходится к $a = (a^((1)), a^((2)), dots, a^((d))) => $ сходится по метрике
+
+== Теорема
+$(X, rho)$ - полное метрическое пространство, $Y subset X$. Тогда $(Y, rho)$ - полное $<=>$ $Y$ - замкнуто
+=== Доказательство
+"$<==$" $y_n$ - фундаментальная последовательность в $(Y, rho) => y_n$ фундаментальная в $(X, rho) =>$ найдется $a in X$, такое что $lim y_n = a$ \
+$a$ - предельная точка в $Y$, значит, она лежит в $Y$, потому что $Y$ замкнуто \
+"$==>$" Пусть $a$ - предельная в $Y =>$ найдется $y_n in Y$, такое что $lim y_n = a => y_n$ - фундаментальная в $X, rho$, $=>$ фундамелнтальная в $(Y, rho) =>_"полнота"$ существует в $Y$, такое что $lim y_n = b =>$ по единственности предела $a = b => a in Y$
+= 3 Компактность
+== Определение
+$A and {U_alpha}_(alpha in I)$ - множества \
+${U_alpha}_(alpha in I)$ покрывают множество $A$, если $A subset union.big_(alpha in I) U_alpha$ \
+Тогда ${U_alpha}_(alpha in I)$ - покрытие множества $A$
+== Определение
+Открытое покрытие = покрытие открытыми множествами
+== Определение
+$(X, rho)$ - метрическое просранство $K subset X$ \
+$K$ - компакт (компактное множество), если из любого его покрытия открытыми множествами можно извлечь конечное подпокрытие
+
+== Теорема о свойстве компактных множеств
+$(X, rho)$ - метрическое пространство
++ $K subset Y subset X$ Тогда $K$ - компакт в $(X, rho) <=> K$ - компакт в $(Y, rho)$ 
++ $K$ - замкнуто и окграничено
++ Замкнутое подмножествами компакта - компакт
+=== Доказательство
++
+"$==>$" Пусть ${U_alpha}_(alpha in I)$ - октрытое покрытие $K$ в $(Y, rho)$, то есть $U_alpha$ - открытое множества в $(Y, rho) =>$ найдутся $G_alpha subset X$ открытое множество в $(X, rho)$, такое что $U_alpha = Y inter G_alpha$ \
+$K union.big_(alpha in I) U_alpha subset union.big_(alpha in I) G_alpha$, то есть ${G_alpha}_(alpha in I)$ - открыте покрытие $K$ в $(X, rho) =>_(K - "компакт") K subset union_(j=1)^n G_alpha_j$ для некоторых $alpha_1, dots, alpha_n$ \
+$K = Y inter K subset Y inter union.big_(j=1)^n G_alpha_j = union.big_(j=1)^n (Y inter G_alpha_j) = union.big_(j=1)^n U_alpha_j => K$ - компакт в $(Y, rho)$ \
+"$<==$" Пусть ${G_alpha}_(alpha in I)$ открытое покрытие $K$ в $(X, rho) => U_alpha := Y inter G_alpha$ - открытые множества в $(Y, rho)$ \
+Тогда $K = Y inter K subset Y inter union.big_(alpha in I) G_alpha = union.big_(alpha in I) (Y inter G_alpha) = union.big_(alpha in I) U_alpha$ \
+то есть ${U_alpha}_(alpha in I)$ - открытое покрытие $K$ в $(Y, rho)$ \
+$=>_(K - "компакт") K subset union.big_(j=1)^n U_alpha_j subset union.big_(j=1)^n G_alpha_j => K$ - компакт в $(X, rho)$ \
+2.
+$K$ - ограничено. Возьмем $a in K$ \
+$K subset union.big_(n=1)^oo B_n (a)$ - открытое покрытие \
+$K$ - компакт $=>$ можно извлечь конечное подпокрытие $n_1 < n_2 < dots < n_k$ \
+$K subset union.big_(j=1)^k B_n_j (a) = B_n_k (a)$, значит $K$ ограничено \
+
+$K$ - замкнуто \
+Надо доказать, что $X \\ K$ - открытое множество, то есть, что любоая точка $a in X \\ K$ - внутренняя точка в $X\\ K$ \ Для $x in K$ выбереме $r_x > 0$, такой что $B_r_x (x) inter B_r_x (a) = emptyset$ \
+$K subset union.big_(x  in K) B_r_x (x)$ - открытое покрытие \
+$K$ - компакт $=>$ найдутся точки $x_1, x_2, dots x_n$, такое что $K subset union.big_(j=1)^n B_r_x_j (x_j)$ \
+$r:= min {r_x_1, r_x_2, dots, r_x_n} > 0$ \
+Проверим, что $B_r (a) subset X \\ K$, то есть $B_r (a) inter K = nothing$ \
+$underbrace(B_r_x_j (a), supset B_r (a) ) inter B_r_x_j (x_j) = nothing => B_r (a) inter B_r_x_j (x_j) = nothing => B_r (a) inter underbrace(union.big_(j=1)^n B_r_x_j (x_j), K subset ) = nothing => B_r (a) inter K = nothing => a$ - внутрення точка для $X\\ K$ 
+3.
+$K$ - компакт, $K subset overline(K), overline(K)$ - замкнуто. Надо доказать, что $overline(K)$ - замкнуто \
+Возьмем открытое покрытие для $overline(K), overline(K) subset union.big_(alpha in I) G_alpha, G_alpha$ - открытое \
+$X \\ overline(K)$ - открытое $=> K subset X = (X \\ overline(K)) union union.big_(alpha in I) G_alpha$ - открытое покрытие $K$ - выберем конечное подпокрытие $overline(K) subset K subset (X \\ overline(K)) union union.big_(j=1)^n G_alpha_j => overline(K) subset union_(j=1)^n G_alpha_j => overline(K)$ - компакт
+
+== Теорема
+$(X, rho)$ - метрическое пространство, $K_alpha$ - семейство компактов. Тогда если пересечение любого конечного числа компактов из этого семейства непусто, то и пересечения всех непусто
+=== Доказательство
+От противного. Пусть $inter_(alpha in I) K_alpha = nothing => K_alpha_0 inter inter.big_(alpha != alpha_0) K_alpha = nothing$ \
+$=> K_alpha_0 subset X \\ inter.big_(alpha != alpha_0) K_alpha = union.big_(alpha != alpha_0) (X \\ K_alpha)$ - открытые множества. то есть октрытые покрытия для $K_alpha_0$ \
+Извлечем конечное подпокрытие $K_alpha_0 subset union.big_(j=1)^n X \\ K_alpha_j = X \\ inter.big_(j=1)^n K_alpha_j => inter.big_(j=0)^n K_alpha_j = nothing$ противоречие
+=== Следствие
+$K_1 supset K_2 supset K_3 supset dots$ непуытсые компакты. Тогда $inter.big_(n=1)^oo K_n != nothing$
+
+== Определение
+$(X, rho)$ - метрическое пространство $K subset X$ \
+$K$ - секвенциально компактное множество, если для любой последовательности точек из $K$ найдется такая подпоследовательность, которая стремится к некоторой точки из $K$
+=== Замечание
+Секвенциальный компакт - замкнутое множество
+$a$ - предельаня точка $K$ $=>$ существует $x_n in K$ различные, т. ч. $lim x_n = a => lim x_n_k = a => a in K$ \
+
+== Теорема
+Всякое бесконечное подмножество компакта имеет предельную точку
+=== Доказательство
+$K$ - компакт. $A subset K$ и $A$ - бесконечное множество. От противного \
+Пусть $A` = nothing$ \
+Тогда $A supset A` => A$ - замкнуто, значит $A$ - компактно \
+Возьмем $a in A$ она не предельная, то есть найдется такой $r_a > 0$, такой что $circle(B)_r_a (a) inter A = nothing$
+$A subset union.big_(a in A) B_r_a (a)$ - покрытие $A$ - откр. множествами каждоме множество покрывает ровно одну точку $=>$ ни одно из множеств нельзя убрать $=>$ нет конечного подпокрытия \
+=== Следствие
+Компакт $=>$ секвенциальный компакт \
+==== Доказательство
+$K$ - компакт, $x_n in K$ - последовательнсоть точек из $K$ \
+$D := {x_1, x_2, x_3, dots}$ \
+1. Случай \#$D < + oo$ - какой-то элемент в множестве $D$ повторился бесконечное число раз, давайте его возьмем в качестве подпоследовательности, получили подпоследовательность, имеющую предел и этот предел лежит в $K$
+2. Случай \#$D = +oo$, тогда воспользуемся теоремой, и множество $D$ имеет предельную точку, обонзначим ее $a$ \ $=>$ найдется последовательность различных элементов из $D$ $x_n_k$, такая что $lim x_n_k = a$ \ переставим индексы в порядке возрастания и получим последовательность \ $a in K$, такая что предельная точка $K$ и $K$ - замкнуто
+
+== Теорема
+$K$ - секвеницальный компакт в $(X, rho)$. Тогда $(K, rho)$ - полное
+=== Доказательство
+Пусть $x_n in K$ - фундаментальная последовательность \ Поскольку $K$ - секвенциальный компакт у $x_n$ есть подпоследовательность, имеющая предел в $K$. Следовательно у всей последовательности тот же предел
+
+== Определение
+$(X, rho)$ - метрическое пространство, $A subset X, epsilon > 0$ \
+$E subset A$ - $epsilon$-сеть для множества $A$, если $forall a in A: exists e in E$ для которой $rho(a, e) < epsilon$ \
+Это означат, что множество $A subset union.big_(e in E) B_epsilon (e)$ \
+Конечная $epsilon$-сеть, если $E$ - конечное множество
+
+== Определение
+$A$ - вполне ограничено, если $forall epsilon > 0$ у него есть конечная $epsilon$ - сеть
+
+== Теорема
++ Вполне ограниченное множвество ограничено
++ В $RR^d$ ограниченое множество вполне ограничено 
+=== Доказательство
++ Возьмем $epsilon = 1$ и конечную $1$-сеть $a_1, a_2, dots a_n$. В качестве $R$ будет $1 + max_(k=2, dots, n) rho(a_1, a_k)$. Поймем, что $A subset overline(B)_R (a_1)$ \ Берем $x in A$ $=>$ найдется $a_k$, такая что $rho(x, a_k) < 1$ $=> rho(x, a_1) <= rho(x, a_k) (< 1) + rho(a_k, a_1) < R => x in B_R (a)$ 
++ $A$ - ограниченное множество $=>$ содержится в некотором шарике, значит содержится в некоторм кубике. Возьмем натуральное число $n$ и нарежем стороны кубика на $n$ равномерных частей, получилась нарезка на маленькие кубики со стороной $l/n$ \ Берем маленький кубик $Q$, если $A inter Q = nothing$ выбрасываем его если $A inter Q != nothing$. Берем в этом пересечении ровно одну точку. Всего выбрали не больше, чем $n^d$ точек. Всего выбрали не больше, чем $n^d$ точек. Возьмем $x in A$ она лежит в кубике $Q =>$ есть выбрання точка $q$ из этого же кубилка $=> rho(x, a) <= sqrt(d) dot l/n$, поэтому если $n$ выбрано так, что $sqrt(d) dot l/n < epsilon$, то мы получили конечную $epsilon$-сеть
+== Теорема 
+$K$ - секвенциальный компакт $=>$ $K$ - вполне ограничено
+=== Доказательство
+От противного. Пусть для $epsilon > 0$ в $K$ нет конечной $epsilon$-сети. Возьмем $x_1 in K$ - это не $epsilon$-сеть, значит найдется $x_2 in K$, такая что $rho(x_1, x_2) >= epsilon$. Берем $x_1, x_2$ - это не $epsilon$-сеть $=>$ найдется $x_3 in K$, такое что $rho(x_3, x_1) >= epsilon$ и $rho(x_3, x_2) >= epsilon$ \ ... \ $x_1, x_2, dots x_n$ - это не $epsilon$-сеть $=>$ найдется $x_(n+1) in K$, такая что $rho(x_(n+1), x_j) >= epsilon forall j = 1, dots, n$ \
+Получим последовательность для котороый $rho(x_k, x_n) >= epsilon$ при $k != n$ \
+Тогда любая ее подпоследовательность обладает тем же свойствами $=>$ любая подпоследовательность не фундаментальная $=>$ ни у какой подпоследовательнсоть нет предела 
+
+== Теорема Хаусдорфа
+$K$ - вполне ограничено и $(K, rho)$ - полное пространство \ Тогда $K$ - компакт
+== Следствие
+$(X, rho)$ - метрическое пространство, $K subset X$. Следующие условия равносильны
++ $K$ - компакт
++ $K$ - секвенциальный компакт
++ $K$ - вполе ограничено и $(K, rho)$ - полное
+=== Следствие
+$(X, rho)$ - полное метрическое пространство, $K subset X$. Следующие условия равносильны
++ $K$ - компакт
++ $K$ - секвенциальный компакт
++ $K$ - вполне ограничено и замкнутоо
+=== Следствие (характеристика компактов в $RR^d$)
+Следующие условия равносильны:
++ $K$ - компакт
++ $K$ - секвенциальный компакт
++ $K$ - замкнуто и ограничено
