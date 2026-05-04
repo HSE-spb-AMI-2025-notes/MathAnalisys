@@ -689,3 +689,234 @@ $sum_(k=1)^oo u_k$ равномерно сходятся $<=> r_k arrows.rr 0$
 
 === Доказательство
 Ряд равномерно сходится $<=> S_n$ равномерно сходится, то есть равномерно сходится к $S(x):= sum_(k=1)^oo u_k (x) <=> underbrace(S - S_n, = r_n) arrows.rr 0$
+
+== Следствие (необходимые условие равносильности сходимости ряда)
+$sum_(n=1)^oo u_n (x)$ равномерно сходятся на $E$
+
+$-> u_n arrows.rr 0$ на $E$
+
+=== Доказательство
+$S_n := sum_(k=1)^n u_k arrows.rr S := sum_(k=1)^oo u_k => u_n = S_n - S_(n-1) arrows.rr S - S = 0$
+
+== Замечание
++ Если существуеют такие $x_n in EE$, что $abs(u_n (x_n)) > epsilon$, то равномерной сходимости нет (так как в этом случае $u_n !arrows.rr 0$)
+
++ Если существуют $x_n in E$ для которых $sum_(n=1)^oo u_n (x_n)$ расходится, то из этого не следует отсутсвие равномерной сходимости ряда $u_n (x) = cases(1/n "при" x in (1/(n+1); 1/n], 0 "иначе")$ $sum u_n (1/n) = sum 1/n$ - расходится. Но ряд $sum u_n$ равносерно сходится на $[0,1]$
+
+== Критерий Коши для равномерной сходимости ряд
+$u_n: E -> RR$ тогда ряд $sum_(k=1)^oo u_n (x)$ равномерно сходится на $E <=> forall epsilon > 0 exists N: forall n > m >= m: forall x in E => abs(sum_(k=m+1)^n u_k (x)) < epsilon$
+=== Доказательство
+$S_n := sum_(k=1)^n u_k$
+
+$sum_(k=1)^oo u_k$ сходится равномерно $<=> S_n$ сходится равномерно $<==>^"крит. Коши"$ $forall epsilon > 0 exists N : forall n > m >= N: forall x in E => abs(S_n (x) - S_m (x)) < epsilon, S_n (x) - s_m (x) = sum_(k=m+1)^n u_k (x)$
+
+== Признак сравнение
+$u_N, v_n : E -> RR, abs(u_n (x)) <= v_n (x) forall n forall x in E$
+
+$sum_(n=1)^oo v_n (x)$ равномерно сходится на $E$. Тогда $sum_(n=1)^oo u_n (x)$ равномерно сходится на $E$
+
+=== Доказательство
+$sum_(n=1)^oo v_n$ равномерно сходится $<==>^"кр. Коши"$ $forall epsilon > 0: exists N: forall n > m >= N: forall x in E => abs(sum_(k=m+1)^oo v_n (x)) < epsilon, abs(sum_(k=m+1)^n u_k (x)) <= sum_(k=m+1)^n abs(u_k (x)) <= abs(sum_(k=m+1)^n v_n)$
+
+$=>$ критерий Коши для $sum_(n=1)^oo u_n (x)$
+
+=== Следствие 
++ Если ряд $sum_(n=1)^oo abs(u_n (x))$ равномерно сходится на $E$, то $sum_(n=1)^oo u_n (x)$ равномерно сходится на $E$. \ Доказательстов: $v_n (x) := abs(u_n (x))$
+
++ Если $abs(u_n (x)) <= a_n in RR forall x in E$, и ряд $sum_(n=1)^oo a_n$ - сходится, то $sum_(n=1)^oo u_n (x)$ сходится равномерно на $E$ (признак Вейерштрасса) \ Доказательство: $v_n (x) equiv a_n$
+
+== Замечание
+
+Равномерная и абсолютная сходимость про разное
+
++ $sum_(n=1)^oo x^n, x in (0,1)$ абсолютно сходится, а равномерно нет #emoji.face.sad $x^n !arrows.rr 0$
+
++ $sum_(n=1)^oo (-1)^n/n$ равномерно сходимость нет, а абсолютной нет
++ Бвают ряды $sum_(n=1)^oo u_n (x)$ схоидтся равномерно, сходится абсолютно, но ряд $sum_(n=1)^oo abs(u_n (x))$ сходится равномерно
+
+== Признак Дирихле
+$a_n, b_n : E -> RR$. Если
++ частичные суммы $sum_(k=1)^n a_k (x) =: A_n (x)$ равномерно ограничены
++ $b_n arrows.rr 0$ на $E$
++ $b_n (x)$ монотонные по $n forall x in E$
+То ряд $sum_(n=1)^oo a_n (x) b_n (x)$ сходится равномерно на $E$
+
+=== Доказательство
+$A_n := sum_(k=1)^n a_k$. Надо доказать, что $S_n := sum_(k=1)^n a_k b_k$ равномерно сходится
+
+$S_n = A_n b_n + sum_(k=1)^(n-1) A_k (b_k - b_(k+1))$
+
+$A_n b_n arrows.rr 0$ так как равномерно ограниченная на равномерно стремящуюся к 0
+
+Осталось доказать, что ряд $sum_(k=1)^n A_k (b_k - b_(k+1))$ равномерно сходящийся
+
+По признак сравнения достаточно доказать, что $sum_(k=1)^oo M abs(b_k - b_(k+1))$ равномерно сходится, где $abs(A_k (x)) <= M forall k forall x$
+
+то есть что $sum_(k=1)^oo abs(b_k - b_(k+1))$ равномерно сходится
+
+то есть, что $sum_(k=1)^n abs(b_k - b_(k+1))$ равномерно сходится, то есть получается, что $sum_(k=1)^n abs(b_k - b_(k+1)) = abs(sum_(k=1)^n (b_k - b_(k+1))) = abs(b_1 - b_(n+1)) arrows.rr abs(b_1)$
+
+== Признак Абеля
+
+$a_n ,b_n: E -> RR$. Если 
++ ряд $sum_(k=1)^oo a_k (x)$ равномерно сходящийся на $E$
++ $b_n$ равномерно ограничены
++ $b_n (x)$ монотонные по $n forall x in E$
+То $sum_(n=1)^oo a_n (x) b_n (x)$ равномерно сходится на $E$
+
+=== Доказательство
+$A_n := sum_(k=1)^n a_k, A:= sum_(k=1)^oo a_k, alpha_n := A - A_n = sum_(k=m+1)^oo a_k arrows.rr 0$ (так как хвосты равномерно сходящегося ряда)
+
+Доказать нужно что $S_n$ равномерно сходится ($S_n$ такой же, как и был)
+
+$S_n = underbrace(A_n b_n, A - alpha_n) + sum_(k=1)^(n-1) underbrace(A_k, A - alpha_k) (b_k - b_(k+1)) = A dot b_n - alpha_n b_n + underbrace(sum_(k=1)^(n-1) A (b_k - b_(k+1)), A b_1 - A b_n) - sum_(k=1)^(n-1) alpha_k (b_k - b_(k+1))$
+Осталось доказать, что $alpha_n b_n + sum_(k=1)^(n-1) alpha_k (b_k - b_(k+1))$ равномерно сходится
+
+$alpha_n b_n arrows.rr 0$ равномерно стрем. к 0 на равномерно ограниченную
+
+Осталось понять, что $sum_(k=1)^oo alpha_k (b_k - b_(k+1))$ равномерно сходящийся ряд
+
+Применим условие критерия Коши $abs(b_n) <= M$
+
+Зафиксируем $epsilon > 0$, найдется такой номер $N$, такой что $forall n >= N: forall x in E: abs(alpha_n (x)) < epsilon$
+
+При $n > m >= N$
+
+$abs(sum_(k=m+1)^n alpha_k (b_k - b_(k+1))) <= sum_(k=m+1)^n underbrace(abs(alpha_k), < epsilon) abs(b_k - b_(k+1)) < epsilon dot sum_(k=m+1)^n abs(b_k - b_(k+1)) = epsilon abs(sum_(k=m+1)^n (b_k - b_(k+1))) = epsilon abs(b_(m+1) - b_(n+1)) <= epsilon (abs(b_(m+1)) + abs(b_(n+1))) <= 2 M epsilon$
+
+И тогда получаем, что $sum_(k=1)^oo alpha_k (b_k - b_(k+1))$ равномерно сходится
+
+
+== Признак Лейбница
+$b_n (x) >= 0 forall n forall x in E$ и $b_n arrows.rr$ на $E$, $b_n$ монотонны по $n forall x in E$
+
+Тогда $sum_(n=1)^oo (-1)^n b_n (x)$ равномерно сходится на $E$
+
+== Доказательство
+$a_n = (-1)^(n-1)$ и признак Дирихле
+
+== Пример
+
+$x in (0,1)$
+
+ряд $sum_(n=1)^oo ((-1)^(n-1) x^n)/n$ равномерно сходится по признаку Лейбника $b_n (x) = x^n/n$
+
+$b_n$ монотонно убывают и $b_n arrows.rr 0$, так как $abs( b_n (x)) <= 1/n -> 0$
+
+Ряд $(*)$ абсолютно сходится, так как $sum_(n=1)^oo x^n/n$ сходится (например по признаку Даламбера), но ряд из модулей уже не сходится равномерно
+
+$sum_(k=1)^oo abs(((-1)^(n-1) x^n)/n) = sum_(n=1)^oo x^n/n$ не сходится равномерно
+
+Критерий Коши. Пусть сходится равномерно, тогда $forall epsilon > 0: exists N: forall n > m >= N: forall x in (0,1)$
+
+$sum_(k=m+1)^n x^k/k < epsilon$ устремим $x -> 1$, $sum_(k=m+1)^n 1/k <= epsilon$, это не так, $sum_(k=m+1)^(2m) 1/k > 1/2$, то есть получаем противоречие
+
+= Свойства равномерно сходящихся последовательностей и рядов
+
+== Теорема
+$f_n ,f : E -> RR$, $a$ - предельная точка $E$, $f_n arrows.rr f$ на $E$. $b_n := lim_(x->a) f_n (x) in RR$. Тогда $lim_(n->oo) b_n$ и $lim_(x-> a) f(x)$ существуют, конечны и равны. То есть получается, что $lim_(n->oo) lim_(x->a) f_n (x) = lim_(x-> a) lim_(n-> oo) f_n (x)$
+
+=== Доказательство
+$f_n arrows.rr f$ на $E$ $==>^"кр. Коши"$ $forall epsilon > 0 exists N: forall n > m >= N: forall x in E$ $abs(f_m (x) - f_n (x)) < epsilon$, $x-> a: f_m (x) -> b_m, x->a: f_n (x) -> b_n$
+$=> forall epsilon > 0: exists N: forall m,n >= N: abs(b_m - b_n) <= epsilon$
+
+$==>^"Кр. Коши"$ $b_n$ имеет конечный предел, $b:= lim_(n->oo) b_n$
+
+Докажем, что $lim_(x->a) f(x) = b$
+
+$abs( f(x) - b) <= underbrace(abs(f(x) - f_n (x)), < epsilon "при" forall x in E "и" n >= N_1) + abs( f_n (x) - b_n) + underbrace(abs(b_n - b), < epsilon "при" n >= N_2) < 2 epsilon + underbrace(abs(f_n (x) - f(x)), <epsilon "при" abs(x-a) < delta)$ можем выбрать такой $delta$, то есть вся эта херабора $< 3 epsilon$
+
+$=> lim_(x->a) f(x) = b$
+
+== Теорема
+
+$u_k: E -> RR, a$ - предельная точка $E$, $c_n := lim_(x->a) u_n (x) in RR, sum_(n=1)^oo u_n (x)$ равномерно сходится на $E$
+
+Тогда $lim_(x->a) sum_(n=1)^oo u_n (x) = sum_(n=1)^oo c_n = sum_(n=1)^oo lim_(x->a) u_n (x)$
+
+=== Доказательство
+$f_n := sum_(k=1)^n u_k arrows.rr f:= sum_(k=1)^oo u_k, b_n = lim_(x->a) f_n (x) = lim_(x->a) sum_(k=1)^n u_k (x) = sum_(k=1)^n lim_(x->a) u_k (x) = sum_(k=1)^n c_k$
+
+Тогда по теореме $sum_(k=1)^oo c_k = lim_(n->oo) b_n = lim_(x->a) f(x) = lim_(x->a) sum_(k=1)^oo u_k (x)$
+
+== Следствия 1.
+
+$f_n ,f: E -> RR, a in E, f_n arrows.rr f$ на $E$ и $f_n$ непрерывна в точке $a => f$ непрерывна в точке $a$
+
+=== Доказательство
+
+Если $a$ не предельная точка $E$, то нечего доказывать. Если $a$ - предельная точка $E$, то $f_n (a) = b_n = lim_(x->a) f_n (x) => f(a) = lim_(n->oo) f_n (a) = lim b_n = lim_(x->a) f (x) => f$ неперывная в точка $a$
+
+== Следствие 2
+Аналогично про ряд: 
+
+$u_n : E -> RR, a in E, sum_(n=1)^oo u_n (x)$ равномерно сходится, $u_n$ неперывна в точке $a$
+
+Тогда $sum_(n=1)^oo u_n (x)$ непрерывна в точке $a$
+
+=== Доказательство
+
+$c_n = lim_(x-> a) u_n (x) = u_n (a) => sum_(n=1)^oo u_n (a) = sum_(n=1)^oo c_n = lim_(x->a) sum_(n=1)^oo u_n (x)$ это и есть непрерывность $sum_(n=1)^oo u_n (x)$ в точке $a$
+
+== Пример, что все плохо без равномерной сходимости (не #emoji.fire blazing #emoji.fire rust на сленге)
+$f_n (x) = x^n, E = [0,1]$
+
+$f_n$ непрерывна в 1. $lim_(n->oo) f_n (x) = f(x) = cases(0 "при" x in [0,1), 1 "при" x = 1)$
+
+$f$ не является непрерывной в $1$
+
+== Теорема
+$f_n in C [a,b], f_n arrows.rr f$ на $[a,b]$, $c in [a,b]$
+
+Тогда $x in [a,b]$ $integral_c^x f_n (t) d t arrows.rr integral_c^x f(t) d t$
+
+В частности $lim_(n-> oo) integral_a^b f_n (t) d t = integral_a^b f(t) d t$
+
+=== Доказательство
+$F_n (x) := integral_c^x f_n (t) d t$ и $F(x):= integral_c^x f(t) d t$ - непрерывная функция
+
+$abs(F_n (x) - F(x)) = abs(integral_c^c f_n (t) d t - integral_c^x f(t) d t) <= integral_c^x abs(f_n (t) - f(t)) d t <= abs(x-c) dot max_(t in [c,x]) abs(f_n (t) - f(t)) <= (b-a) sup_(t in [a,b]) abs(f_n (t) - f(t)) -> 0$
+
+== Теорема
+$u_n in C[a,b], sum_(n=1)^oo u_n (x)$ сходится равномерно на $[a,b]$
+
+Тогда $integral_a^b sum_(n=1)^oo u_n (x) d x = sum_(n=1)^oo integral_a^b u_n (x) d x$
+
+=== Доказательство
+$f_n := sum_(k=1)^n u_k arrows.rr f := sum_(k=1)^oo u_k$, тогда по предудыщей теореме
+
+$lim_(n->oo) integral_a^b sum_(k=1)^n u_k (t) d t = lim_(n->oo) sum_(k=1)^n integral_a^b f(t) d t = sum_(k=1)^oo integral_a^b u_k (t) d t = lim_(n->oo) integral_a^b f_n (t) d t = integral_a^b f(t) d t = integral_a^b sum_(k=1)^oo u_k (t) d t$
+
+== Замечание
+
+Поточесной сходимости не достаточно
+
+$f_n (x) = n x e^(-n x^2), E = [0,1]$
+
+$f_n (x) ->_(n->oo) 0$, то есть $f(x) equiv 0$
+
+$integral_0^1 f_n (x) d x = n integral_0^1 x e^(-n x^2) = n integral_0^1 e^(-n y) (d y)/2 = n/2 dot (e^(-n y))/(-n) |^(y=1)_(y=0) = (1-e^(-n))/2 -> 1/2 != integral_(0)^1 f(x) d x = 0$
+
+
+== Теорема
+
+$f_n in C^1 [a,b], c in [a,b], f'_n arrows.rr g$ равном. на $[a,b]$ и $f_n (c) ->_(n->oo) A in RR$
+
+Тогда $f_n$ равномерно сходится на $[a,b]$ и $(lim_(n->oo) f_n (x))' = g(x) = lim_(n->oo) f'_n (x)$
+
+=== Доказательство
+
+$integral_c^x g(t) d t arrows.ll f_c^x f'_n (t) d t$ из предыдущей теоремы
+
+$integral_c^x f'_n (t) d t = f_n (x) - f_n (c) => f_n (x) = f_n (c) + integral_c^x f'_n (t) d t arrows.rr A + integral_c^x g(t) d t =: f(x) => f in C^1 [a,b]$ и $f' = g$
+
+=== Следствие
+$u_n in C^1 [a,b]$, $c in [a,b]$, ряд $sum_(k=1)^oo u'_n (x)$ равномерно сходится, $sum_(k=1)^oo u_n (c)$ - сходится, тогда $sum_(n=1)^oo u_n (x)$ равномерно сходится на $[a,b]$ и $(sum_(n=1)^oo u_n (x))' = sum_(n=1)^oo u'_n (x)$
+
+==== Доказательство
+$f_n := sum_(k=1)^n u_k => f'_n = sum_(k=1)^n u'_k arrows.rr sum_(k=1)^oo u'_k =: g$
+
+$f_n (c) = sum_(k=1)^n u_k (c) -> underbrace(sum_(k=1)^oo u_k (c), = A) in RR => f_n$ равномерно сходится (то есть $sum_(k=1)^oo u_k$ равномерно сходится) и $(sum_(k=1)^oo u_k (x))'=(lim f_n (x))' = g(x) = sum_(k=1)^oo u'_k (x)$
+
+== Упражнение
+Доказать. что ряд $sum_(n=1)^oo (sin n x)/n^2$ равномерно сходится, но почленно его дифф. нельзя
