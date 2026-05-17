@@ -201,7 +201,7 @@ $sum_(k=1)^n a_k b_k = sum_(k=1)^n (A_k - A_(k-1)) b_k = sum_(k=1)^n A_k b_k - s
 + суммы $sum_(k=1)^n a_k =: A_n$ ограничены
 + $b_n$ монотонны
 + $lim b_n = 0$
-Если это выполняется, то $sum_(n=1)^o a_n b_n$ сходится
+Если это выполняется, то $sum_(n=1)^oo a_n b_n$ сходится
 
 ==== Доказательство
 
@@ -527,13 +527,13 @@ $H_n = ln n + gamma + o(1)$
 $f, f_n: E -> RR$ последователность функция $f_n$ поточечно сходится к функции $f$, если $forall x in E:  lim_(n->oo) f_n (x) - f(x)$
 
 == Определение
-$f, f_n: E -> RR$ последовательность функция $f_n$ равномерно на $E$ сходится к функции $f$, если $forall epsilon > 0: exists N; forall n >= N: forall x in E => abs(f_n( x) - f(x)) < epsilon$
+$f, f_n: E -> RR$ последовательность функция $f_n$ равномерно на $E$ сходится к функции $f$, если $forall epsilon > 0: exists N; forall n >= N: forall x in E => abs(f_n (x) - f(x)) < epsilon$
 
 обозначается $f_n arrows.rr f$
 
 == Пример
 $f_n (x) = x^n$ на $(0,1)$
-$f_n$ поточесно сходится $f(x) equiv 0$
+$f_n$ поточечно сходится $f(x) equiv 0$
 
 А равномерной сходимости нет 
 
@@ -542,7 +542,7 @@ $f_n$ поточесно сходится $f(x) equiv 0$
 
 $f_n, f: E -> RR$ Тогда 
 
-$f-n arrows.rr f$ на $E <=> a_n:= sup_(x in E) abs(f_n (x) - f(x)) ->_(n->oo) o$
+$f_n arrows.rr f$ на $E <=> a_n:= sup_(x in E) abs(f_n (x) - f(x)) ->_(n->oo) 0$
 
 === Доказательство
 "$<==$"
@@ -568,7 +568,7 @@ $forall epsilon > 0: exists N: forall n >= N: forall x in E: abs(f_n (x)- f(x)) 
 
 "$<==$" $a_n = sup_(x in E) abs(f_n (x) - f(x))$ найдется такой $x_n in E$, что $abs(f_n (x_n) - f(x_n)) > a_n/2$ $=> lim abs(f_n (x_n) - f(x_n)) = 0 => lim a_n = 0$
 
-== Орпопаделение
+== Определение
 
 $f_n: E -> RR$ - равномерно ограниченная последовательность, если существует $M in RR$, такая что $abs(f_n (x)) <= M$ и $forall x in E forall n$
 
@@ -590,7 +590,7 @@ $sup abs(f_n (x) g_n (x)) <= M sup abs(g_n (x)) -> 0$
   Парам-пам-пам, парам-пам-пам, парам   пам    пам
 ]
 
-$f_n: E -> RR$ Тогда $f_n$ равномерно сходится к некоторой функции $<=> forall epsilon > 0: exists N: forall m,n >= N, forall x in E => abs(f_n (x) - f_m(x)) < epsilon$
+$f_n: E -> RR$ Тогда $f_n$ равномерно сходится к некоторой функции $<=> forall epsilon > 0: exists N: forall m,n >= N, forall x in E => abs(f_n (x) - f_m (x)) < epsilon$
 
 === Доказательство
 "$==>$" Пусть $f_n arrows.rr f$ на $E$. Возьмем $epsilon > 0$
@@ -604,7 +604,7 @@ $=> abs(f_n (x) - f_m (x)) <= abs(f_n (x) - f(x)) + abs(f (x) - f_m (x)) < epsil
 "$<==$"
 
 Зафиксируем $x in E$. Тогда числовая последовательность $f_n (x)$ - фундаментальна
-$=> $ у нее есть конечнаый предел $f(x) := lim f_n (x)$. проверим, что $exists N: forall m > n >= N: forall x in E: abs(f_n (x) - f_m (x)) < epsilon$
+$=> $ у нее есть конечный предел $f(x) := lim f_n (x)$. проверим, что $exists N: forall m > n >= N: forall x in E: abs(f_n (x) - f_m (x)) < epsilon$
 
 Устремим $m$ к бесконечности, $abs(f_m (x) - f(x)) <= epsilon$
 
@@ -920,3 +920,252 @@ $f_n (c) = sum_(k=1)^n u_k (c) -> underbrace(sum_(k=1)^oo u_k (c), = A) in RR =>
 
 == Упражнение
 Доказать. что ряд $sum_(n=1)^oo (sin n x)/n^2$ равномерно сходится, но почленно его дифф. нельзя
+
+= Степенные ряды
+== Определение
+$sum_(n=0)^oo a_n (z-z_0)^n, a_n, z,z_0 in CC$ - степенной ряд
+
+== Определение
+Радиус сходимости степенного ряда такое $R in [0, +oo]$, что ряд $sum_(n=0)^oo a_n (z-z_0)^n$ сходится при $abs(z-z_0) < R$ и расходится при $abs(z-z_0)> R$
+
+== Определение
+Круг сходимости это круг $B_R (z_0) = {z in CC: abs(z-z_0) < R}$ 
+
+== пример
+$sum_(n=0)^oo z^n$ схоидтся при $abs(z) < 1$, расходится при $abs(z) > 1$ $=> R = 1$
+
+== Теорема (формула Коши-Адомара)
+Радиус сходимости степенного ряда $sum_(n=0)^oo a_n z^n$ равен $1/(overline(lim) root(n, abs(a_n)))$
+
+=== Доказательство
+Напишем для ряда $sum_(n=0)^oo abs(a_n z^n)$ признак Коши
+
+Если $overline(lim) root(n, abs(a_n z^n)) < 1$, то ряд схоидтся, $>1$, то ряд расходится и члены ряда не стремятся к нулю
+
+$overline(lim) root(n, abs(a_n z^n)) = overline(lim) root(n, abs(a_n)) abs(z) = abs(z) overline(lim) root(n, abs(a_n))$, то есть если $abs(z) < 1/(overline(lim) root(n, abs(a_n)))$, то ряд $sum_(n=0)^oo abs(a_n z^n)$ схоидтся $=> sum_(n=0)^oo a_n z^n$ сходится
+
+Если $abs(z) > 1/(overline(lim) root(n, abs(a_n)))$, то $a_n z^n$ не стремитяс к $0 => sum_(n=0)^oo a_n z^n$ расходится
+
+== Следствия
+=== 1
+Внутри круга сходимости ряд сходится абсолютно
+=== 2
+Если ряда $sum_(n=0)^oo a_n z^n$ схоидтся при $z = z_*$, то он сходится и при $abs(z) < abs(z_*)$
+
+=== Доказательство
+Из сходимости при $z = z_*$ следует, что $abs(z_*) <= R$ 
+$=>$ при $abs(z) < abs(z_*) <= R$ есть сходимость
+
+=== 3
+Если ряд $sum_(n=0)^oo a_n z^n$ расхоидтся при $z = z_*$, то он расходится и при $abs(z) > abs(z_*)$
+
+== Примеры
+=== 1
+$sum_(n=0)^oo z^n/n!, R = 1/(overline(lim) root(n, 1/n!)) = 0$
+
+$overline(lim) 1/root(n, n!) = lim 1/root(n, n!) = lim 1/root(n, n^n e^(-n) sqrt(2 pi n)) = lim 1/(n e^(-1) root(2n, 2 pi n)) = 0$
+
+=== 2
+$sum_(n=0)^oo n! z^n, R = 0$
+
+=== 3
+$sum_(n=0)^oo z^n/n, R = 1/(overline(lim) root(n, 1/n)) = 1$
+
+$z = 1: sum_(n=0)^oo 1/n$ - расходится
+
+$z = -1: sum_(n=0)^oo (-1)^n/n$ - сходится
+
+== Теорема
+$R$ - радиус сходимости степенного ряда $sum_(n=0)^oo a_n z^n, 0 < r < R$
+
+Тогда ряд сходится равномерно в круге $abs(z) <= r$
+
+=== Доказательство
+Ряд $sum_(n=0)^oo abs(a_n r^n)$ сходится
+
+Если $abs(z) <= r$, то $abs(a_n z^n) <= abs(a_n r^n)$, значит и ряд $sum_(n=0)^oo a_n z^n$ сходится равномерно при $abs(z) <= r$ по признаку Вейерштрасса
+
+== Следствие (не ведут колобки)
+$R$ - радиус сходимости степенного ряда $sum_(n=0)^oo a_n z^n, f(z)$ - его сумма при $abs(z) < R$
+
+Тогда $f$ непрерывна при $abs(z) < R$
+
+=== Доказательство
+Проверим непрерывность в точке $z_*$  $abs(z_*) < R$. Возьмем $r$, такой что $abs(z_*) < r < R$
+
+Ряд равномерно сходится в круге $abs(z) <= r => sum_(n=0)^oo a_n z^n =: f(z)$ непрерывна в круге $abs(z) <= r$, значит непрерывна в точке $z_*$
+
+== Лемма
+Пусть $lim x_n = x_* in (0, +oo)$. Тогда $overline(lim) x_n y_n = x_* dot overline(lim) y_n, A:= overline(lim) x_n y_n, B:= overline(lim) y_n$
+
+=== Доказательство
+
+существет $x_n_k y_n_k -> A => y_n_k  = (x_n_k y_n_k)/(x_n_k) -> A/(x_*) <= B$, так как $B$ - наибольший из частичных пределов для $x_n y_n$ $=> A <= x_* dot B$
+
+Существуеют $y_n_k -> B => x_n_k y_n_k -> x_* B <= A$, так как $A$ наибольший из частичных пределов для $x_n y_n$
+
+=== Следствие 
+Радиуса сходимости у рядов
+
+$sum_(n=0)^oo a_n z^n, sum_(n=1)^oo n a_n z^(n-1), sum_(n=1)^oo a_n (z^(n+1))/(n+1)$ равны
+
+==== Доказательство
+Радиусы сходимости у $sum_(n=1)^oo n a_n z^(n-1)$ и $sum_(n=0)^oo n a_n z^n$ равны
+
+но у ряда $sum n a_n z^n$ радиус сходимости равен $1/(overline(lim) root(n, n abs(a_n))) = 1/(overline(lim) root(n,n) root(n, abs(a_n))) = 1/(overline(lim) root(n, abs(a_n)))$, то есть радиус сходимости $sum_(n=0)^oo a_n z_n$
+
+== Теорема (почленное интегрирование степенного ряда)
+$a_m in RR, x_0, x in RR$
+
+$R$ - радиус схоидмости ряда $sum_(n=0)^oo a_n (x-x_0)^n$
+
+Тогда при $abs(x-x_0) < R$
+
+$integral_(x_0)^x sum_(n=0)^oo a_n (t-x_0)^n d t = sum_(n=0)^oo a_n (x-x_0)^(n+1)/(n+1)$
+
+=== Доказательство
+Ряд равномерно сходится в кргуе $abs(z-x_0) <= abs(x-x_0) < R$
+
+В частности ряд равномерно сходится на отрезке $[x_0, x]$
+
+$=> integral_(x_0)^x sum_(n=0)^oo a_n (t-x_0)^n d t = sum_(n=0)^oo a_n integral_(x_0)^x (t-x_0)^n d t = sum_(n=0)^oo a_n (x-x_0)^(n+1)/(n+1)$
+
+== Определение
+$E subset CC$ и $f: E -> CC$, $a in "Int" E$
+
+$f$ дифф. в точке $a$, если существует $k in CC$, такое что $f(z) = f(a) + k (z-a) + o(z-a)$ при $z->a$
+
+== Определение
+$lim_(z->a) (f(z) - f(a))/(z-a) =: f'(a)$ производная $f$ в точке $a$
+
+=== Замечание
+$f$ дифф в точке $a <=>$ существует $f'(a)$
+
+== Теоремa
+$R$ - радиус сходимости ряда $sum_(n=0)^oo a_n z^n =: f(z)$ 
+
+Тогда $f^((m)) (z) = sum_(n=m)^oo n(n-1)dots(n-m+1) a_n z%(n-m)$
+
+$abs(z) < R$
+
+=== Доказательство
+
+Достаточо доказать дифф $f$
+
+$f'(z) = lim_(w->z) (f(w) - f(z))/(w-z) = lim_(w->z) 1/(w-z) dot sum_(n=0)^oo a_n (w^n - z^n) = lim_(w->z) sum_(n=0)^oo a_n (w^(n-1) + w^(n-2) z + w^(n-3) z^2 + dots + w z^(n-2) + z^(n-1)) = sum_(n=1)^oo n a_n z^(n-1)$
+
+$o < r < R$
+
+$abs(z) < r$ будем доказывать дифф. в такой точке $z$
+
+$abs(w) < r => abs(a_n (w^(n-1) + w^(n-2) z + dots + z^(n-1))) <= abs(a_n) (r^(n-1) + r^(n-1) + dots + r^(n-1)) = n r^(n-1) abs(a_n)$
+
+Для Вейерштрасса нужна сходимость ряда $sum_(n=1)^oo n r^(n-1) abs(a_n)$, то есть абс. сходимость ряда $sum_(n=1)^oo n a_n z^(n-1)$ при $z = r$ лежит в круге сходимости
+
+== Теорема (единственность разложения функции в степенной ряд)
+Если $f(z) = sum_(n=0)^oo a_n (z-z_0)^n$ в круге $abs(z-z_0)< R$, то $a_n = (f^((n)) (z_0))/n!$
+
+=== Доказательство
+$f^((m)) (z) = sum_(n=m)^oo n(n-1) dots (n-m+1) a_n (z-z_0)^(n-m)$
+
+$f^((m)) (z_0) = m (m-1) dots (m-m+1) a_m = m! a_m => a_m = (f^((m)) z_0)/m!$
+
+== Определение
+$f$ бесконечно дифф в точке $z_0$, тогда ряд $sum_(n=0)^oo (f^((n)) (z_0))/(n!) (z-z_0)^n$ - ряд Тейлора для функции $f$ в точке $z_0$
+
+
+== Определение
+$f$ аналитическая в точке $z_0$, если $f(z) = sum_(n=0)^oo (f^((n)) (z_0))/n! (z-z_0)^n$ в окрестности точки $z_0$
+
+=== Замечание
+из бесконечная дифф. не следует аналитичность
+
+=== Пример
+$f(x) = cases(e^(-1/x^2) ", при" x != 0,0)$
+
+Докажем, что $f^((n)) (x) = cases((P_n (x))/x^(3n) e^(-1/x^2),0)$ где $P_n (x)$ - многочлен
+
+Индукция. База $n=0$
+
+Переход $n-> n+1$ пусть $x != 0$
+
+$f^((n+1))  (x) = (P_n (x) x^(-3n) e^(-1/x^2))' = P'_n (x) x^(-3n) e^(-1/x^2) + P_n (x) (-3n) x^(-3n-1) e^(-1/x^2) + P_n (x) x^(-3n) e^(-1/x^2) 1/x^3 = e^(-1/x^2) (x^3 P'_n (x) - 3 n x^2 P_n (x) + P_n (x))/x^(3n+3)$
+
+$f^((n+1)) (0) = lim_(x->0) (f^((n)) (x) - f^((n)) (0))/(x-0) = lim_(x-> 0) (P_n (x))/(x^(3n+1)) e^(-1/x^2)  = | y = 1/x | = lim_(y -> oo) y^(3n+1) e^(-y^2) P_n (1/y) = 0$
+
+В нуле нет аналитичности 
+
+$f^((n)) (0) = 0, sum_(n=0)^oo (f^((n)) (0))/n! x^n equiv 0$
+
+== Разложение элементарных функций в ряд Тейлора
+
+$exp x = sum_(n=0)^oo x^n/n!, R = oo, cos x = sum_(n=0)^oo ((-1)^n x^(2n))/(2n)!, R = oo$
+
+$sin x = sum_(n=0)^oo ((-1)^n x^(2n+1))/(2n+1)!, R = oo$
+
+== Определение
+$1. exp z := sum_(n=0)^oo z^n/n!$
+
+$2. cos z = sum_(n=0)^oo ((-1)^n z^(2n))/(2n)!$
+
+$3. sin z = sum_(n=0)^oo ((-1)^n z^(2n+1))/(2n+1)!$
+
+=== Замечение
+$exp (i z) = cos z + i sin z$
+
+$cos z = (exp z + exp(-z))/2, sin z = (exp (i z) + (exp(-i z)))/(2i)$
+
+=== Упражнение
+Доказать, что $cos^2 + sin^2 = 1$
+
+$4. ln (1+x) = sum_(n=1)^oo ((-1)^(n-1) x^n)/n$ при $x in (-1,1)$
+
+$5. arctan x = sum_(n=0)^oo (-1)^n x^(2n+1)/(2n+1)$ при $x in (-1,1)$
+
+=== Доказательство
+$ln(1+x) = integral_0^x (d t)/(1+t) = integral_0^x sum_(n=0)^oo (-t)^n d t = sum_(n=0)^oo integral_0^x (-t)^n d t = sum_(n=0)^oo ((-1)^n x^(n+1))/(n+1)$
+
+$arctan x = integral_0^ x (d t)/(1+t^2) = integral_0^x sum_(n=0)^oo (-1)^n t^(2n) d t = sum_(n=0)^oo (-1)^n (x^(2n+1))/(2n+1)$
+
+
+== Определение (Нисходящая факториальная степень)
+
+$p^underline(n) := p (p-1) (p-2) dots (p-n + 1)$
+
+Замечание $n^underline(n) = n!, C_n^m = n^underline(m)/m!$
+
+$6. (1+x)^p = sum_(n=0)^oo (p^underline(n))/n! x^n$ при $x in (-1,1)$
+
+== Теорема
++ Радиус сходимости ряда $ sum_(n=0)^oo (p^underline(n))/n! x^n$ равен 1
++ Если $f(x) :=  sum_(n=0)^oo (p^underline(n))/n! x^n$ при $x in (-1,1)$, то $f'(x) dot (1+x) = p f(x)$
++ сама формула
+
+=== Доказательство
+Посчитаем $lim root(n, abs(p^underline(n))/n!) = lim a_(n+1)/a_n$ (если предел справа существует) $= lim abs(p^underline(n+1))/(n+1)! dot abs((n!)/p^underline(n)) = lim abs((p-n)/(n+1)) = 1$
+
+$=> R = 1/(overline(lim) root(n, a_n)) = 1$
+
+$f'(x) = sum_(n=1)^oo p^(underline(n))/n! n x^(n-1)$
+
+$(1+x) f'(x) = sum_(n=1)^oo p^underline(n)/(n-1)! x^(n-1) + sum_(n=0)^oo p^(underline(n))/n! n x^(n) $ (начинаем индекс с 0 в первой сумме) $= sum_(n=0)^oo x^n/n! (p^underline(n+1) + n p^underline(n)) = p sum_(n=0)^oo p^underline(n)/n! x^n = p f(x)$
+
+3.
+$g(x) := f(x) dot (1+x)^(-p)$
+
+Надо доказать, что $g equiv 1$ при $x in (-1,1)$
+
+$g(0) = f(0) = 1$
+
+$g'(x) = f'(x) (1+x)^(-p) + f(x) (-p) (1+x)^(-p-1) = (p f(x))/(1+x) (1+x)^(-p) + f(x) (-p) (1+x)^(-p-1) = 0$
+
+=== Частный случай
+$p = -1/2$
+
+$1/sqrt(1+x) = sum_(n=0)^oo (-1)^n (C_(2n)^n)/4^n x^n$
+
+
+$7. arcsin x = sum_(n=0)^oo (C_(2n)^n)/4^n x^(2n+1)/(2n+1)$
+
+=== Доказательство
+$arcsin x = integral_(0)^x (d t)/sqrt(1-t^2) = integral_0^x sum_(n=0)^oo (-1)^n (C_(2n)^n)/4^n (-t^2)^n d t = sum_(n=0)^oo (C_(2n)^(n))/4^n integral_0^x t^(2n) d t = sum_(n=0)^oo (C_(2n)^n)/4^n x^(2n+1)/(2n+1)$
