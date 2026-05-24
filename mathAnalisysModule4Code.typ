@@ -4,26 +4,32 @@
 
 #outline(title: none)
 
+#show math.equation: set text(size: 1.1em)
+
 = Ряды
 = Ряды в нормированных пространствах
 #definition[
 $X$ норм. простр. $sum_(n=1)^oo x_n$ - ряд \
 Частичная сумма $S_n := sum_(n=1)^n x_n$ \
 Если существует предел $lim S_n$, то он называется суммой ряда, а ряд называется сходящимся
-
-Замечание. 
-В нормированом пространстве $RR$ нет $plus.minus oo$, поэтому ряд сходится $= lim S_n$ существует и конечен
+]
+#warning-block[
+В нормированом пространстве $RR$ нет $plus.minus oo$, поэтому ряд сходится $<=> lim S_n$ существует и конечен
 ]
 #theorem[
-Если ряд $sum_(n=1)^oo x_n$ сходится, то $lim x_n = 0$
+Если ряд $sum_(n=1)^oo x_n$ сходится, то: $ lim x_n = 0 $
 ]
 #proof[
-Пусть $S$ - сумма ряда, тогда $lim S_n = S$ и предел $lim x_n = lim (S_n - S_(n-1)) = lim S_n - lim S_(n-1) = S - S = 0$
+Пусть $S$ - сумма ряда, тогда $lim S_n = S$ и предел $ lim x_n = lim (S_n - S_(n-1)) = lim S_n - lim S_(n-1) = S - S = 0 $
 ]
 #property[
-+ Линейность. Если $sum_(n=1)^oo x_n$ и сходятся $sum_(n=1)^oo y_n$ сходятся, $alpha, beta in RR$, то ряд $sum_(n=1)^oo (alpha x_n + beta y_n)$ сходится и его сумма $sum (alpha x_n + beta x_n) = alpha sum x_n + beta sum y_n$ 
++ Линейность. Если $sum_(n=1)^oo x_n$ и сходятся $sum_(n=1)^oo y_n$ сходятся, $alpha, beta in RR$, то ряд $sum_(n=1)^oo (alpha x_n + beta y_n)$ сходится и его сумма $ sum (alpha x_n + beta x_n) = alpha sum x_n + beta sum y_n $ 
+
 + Изменение конечного числа членов последовательности не влияет на сходимость
+
+
 + Если ряд сходится, то расстановка скобок не меняет сумму. Расстановка скобок = выбор подпоследовательности в последовательности частичных сумм.
+
 + В $CC$ и $RR^d$ сходимость ряда означает сходимость числовых рядов составленных для каждой координаты отдельно
 ]
 #theorem[Критерий Коши для сходимости рядов][
@@ -32,7 +38,7 @@ $X$ - полное нормированное пространство. Тогд
 + $forall epsilon: exists N: forall n > m >= N: norm(sum_(k=m+1)^n) < epsilon$
 ]
 #proof[
-1.$<=>$ $S_n$ имеет предел в $X$, а существование предела равносильно фундаментальности, то есть $forall epsilon > 0: exists N: forall n, m >= N: norm(S_n - S_m) < epsilon$, а это одно и то же с условием $qed$
+1.$<=>$ $S_n$ имеет предел в $X$, а существование предела равносильно фундаментальности, то есть $forall epsilon > 0: exists N: forall n, m >= N: norm(S_n - S_m) < epsilon$, а это одно и то же с условием
 ]
 #definition[
 ряд $sum_(n=1)^oo x_n$ называется абсолютно сходящимся, если числовой ряд $sum_(n=1)^oo norm(x_n)$ сходится
@@ -44,7 +50,7 @@ $X$ - полное нормированное пространство. Тогд
 $X$ - полное нормированное пространство. Если ряд $sum x_n$ абсолютно сходится, то он сходится
 ]
 #proof[
-$sum_(n=1)^oo norm(x_n)$ сходится $<==>_"кр. Коши" forall epsilon > 0: exists N: forall n > m >= N: sum_(k=m+1)^n norm(x_k) < epsilon, norm(sum_(k=m+1)^n x_n)<= sum_(k=m+1)^n norm(x_k)< epsilon$ $=> forall epsilon >0: exists N: forall n > m >= N => norm(sum_(k=m+1)^n x_k) < epsilon$
+$ sum_(n=1)^oo norm(x_n) "сходится" <==>_"кр. Коши" forall epsilon > 0: exists N: forall n > m >= N: sum_(k=m+1)^n norm(x_k) < epsilon, norm(sum_(k=m+1)^n x_n)<= sum_(k=m+1)^n norm(x_k)< epsilon $ $ => forall epsilon >0: exists N: forall n > m >= N => norm(sum_(k=m+1)^n x_k) < epsilon $
 
 $<=>$ по критерию коши $sum_(n=1)^oo x_n$ - сходится
 ]
@@ -52,8 +58,8 @@ $<=>$ по критерию коши $sum_(n=1)^oo x_n$ - сходится
 Если ряд $sum x_n$ абсолютно сходится, то $norm(sum_(n=1)^oo x_n ) <= sum_(n=1)^oo norm(x_n)$
 ]
 #proof[
-$S_k:= sum_(k=1)^n x_k -> S:= sum_(k=1)^oo x_k$  \
-$norm(S_n) <= sum_(k=1)^n norm(x_k) -->_(n->oo) sum_(k=1)^oo norm(x_k)$
+$ S_k:= sum_(k=1)^n x_k -> S:= sum_(k=1)^oo x_k $  \
+$ norm(S_n) <= sum_(k=1)^n norm(x_k) -->_(n->oo) sum_(k=1)^oo norm(x_k) $
 ]
 #exercise[
 + Доказать, что если в норм. пространстве для любого ряда выполняется критерий Коши, то $X$ полное
@@ -63,7 +69,7 @@ $norm(S_n) <= sum_(k=1)^n norm(x_k) -->_(n->oo) sum_(k=1)^oo norm(x_k)$
 #theorem[
 $sum_(n=1)^oo x_n$ ряд в нормированном пространстве $X$. Если
 + $lim x_n = 0$
-+ сгруппированнный ряд сходится
++ сгруппированный ряд сходится
 + в каждой группе $<= K$ слагаемых
 Тогда исходный ряд сходится
 ]
@@ -79,7 +85,7 @@ $norm(S_n - S) <= norm(S_n_k - S) + norm(x_(n_k + 1)) + dots + norm(x_n)$
 
 $lim S_n_k = S => exists M$, такоe что $forall k >= M: norm(S_n_k - S) < epsilon$
 
-$lim x_n = - => exists N$, такое что $forall n >= N: norm(x_n) < epsilon$
+$lim x_n = 0 => exists N$, такое что $forall n >= N: norm(x_n) < epsilon$
 
 Возьмем $n>= max{N, n_M}$ тогда 
 
@@ -99,7 +105,7 @@ $S_n = S_(n_(k + 1)) - x_(n_(k + 1)) - x_(n_k -1) - dots - x_(n+1) <= S_(n_(k+1)
 $=> S_n_k <= S_n <= S_(n_(k+1))$ если же члены в группе неположительны, то $S_(n_(k+1)) <= S_n <= S_n_k => lim S_n = S$ 
 ]
 = Знакопостоянные ряды
-В этом параграфе ряди зи неотрицательных вещественных чисал
+В этом параграфе ряды из неотрицательных вещественных чисел
 
 #theorem[
 $x_n >= 0, forall n$ тогда $sum_(n=1)^oo x_n$ - сходится $<=>$ последовательность частичных сумм ограничена
