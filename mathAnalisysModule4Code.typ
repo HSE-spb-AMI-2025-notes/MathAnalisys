@@ -1536,3 +1536,192 @@ $chevron gradient f(a), e_k chevron.r = (partial f)/(partial e_k) (a) = (partial
 
   Непрерывная дифф сохраняется при лин. комп, умножении, композиции
 ]
+
+= Частные производные высших порядков
+
+#definition[
+$f: E -> RR, a in "Int" E$
+
+Предположим, что $(partial f)/(partial x_i)$ существует в окрестности точки $a$
+
+$(partial f)/(partial x_i) : $ окрестность точки $a -> RR$
+
+Если у нее существует частная производная $(partial)/(partial x_i)$, то $(partial)/(partial x_j) ((partial f)/(partial x_i))$ называется частной производной второго порядка по $x_i$ и $x_j$
+
+Обозначение $(partial^2 f)/(partial x_j partial x_i):= partial/(partial x_j)((partial f)/(partial x_i)) $
+
+$f''_(x_i x_j) := (f'_(x_i))'_(x_j)$
+]
+
+#note-block[
+  Сколько производных порядка $r?$ $m^r$
+]
+
+#example[
+$f(x,y) = x^y$
+
+$f'_x = y dot x^(y-1)$
+
+$f'_y = x^y ln x$
+
+$(f'_x)'_y = (y x^(y-1))'_y = x^(y-1) + y x^(y-1) ln x$
+
+$(f'_y)'_x = (x^y ln x)'_x = y^(x-1) x ln x + x^y 1/x$
+
+$f''_(x y) = f''_(y x)$
+]
+
+
+#example[
+  $f(x,y) = cases(x y dot (x^2 -y^2)/(x^2+y^2) "," x^2 + y^2 != 0, 0)$
+
+  при $x^2 + y^2 != 0$  $f'_x (x,y) = y dot (x^2 -y^2)(x^2 + y^2) - x y dot (2 x (x^2 + y^2) - 2x (x^2-y^2))/(x^2 + y^2)^2 = y dot (x^2 -y^2)/(x^2+y^2) + (4 x^2 y^2)/(x^2+y^2)^2$
+
+  $f'_x (0,0) = lim_(y->0) (f(0,y) - f(0,0))/y = 0$
+
+  $f''_(x y) (0,0) = lim_(y->0) (f'_x (0,y) - f'_x (0,0))/y = lim_(y->0) (y (0^2-y^2)/(0+y^2)) dot 1/y = -1$
+
+  $f''_(y x) (0,0) = 1$
+]
+
+#theorem[
+  $f: E -> RR, (x_0, y_0) in "Int" E$
+
+  $f'_x, f'_y$ и $f''_(x y)$ существует в окрестности точки $(x_0, y_0)$ и $f''_(x y)$ непрерывны в точке $(x_0, y_0)$
+
+  Тогда $f''_(y x) (x_0, y_0)$ существует и $f''_(x y) (x_0, y_0) = f''_(y x) (x_0, y_0)$
+]
+#proof[
+  $phi(s):= f(s, y_0 + k) - f(s, y_0)$
+
+  $ phi(x_0 + h) - phi(x_0) = h phi'(x_0 + theta h) $ для некотррого $theta in (0,1)$ (Лагранж)
+
+  $ = h (f'_x (x_0 + theta h, y_0 + k) - f'_x (x_0 + theta h, y_0)) = h k f''_(x y) (x_0 + theta h, y_0 + overline(theta) k) = h k (f''_(x y) (x_0,y_0) + alpha(h,k)) $, где $alpha(h,k) ->_((h,k) ->0) 0$, то есть $abs(alpha(h,k)) < epsilon$ для маленьких $h$ и $k$
+
+  $abs(1/h (phi(x_0+h)/k - phi(x_0)/k) - f''_(x y) (x_0, y_0)) < epsilon$ при $h$ и $k$ близких к нулю
+
+  $phi(x_0)/k = (f(x_0,y_0 + k) - f(x_0, y_0))/k -> f'_y (x_0, y_0)$
+
+  $phi(x_0 + h)/k = f'_y (x_0 + h, y_0)$
+
+  $=> abs(underbrace((f'_y (x_0, y_0) - f'_y (x_0, y_0))/h, ) - f''_(x y) (x_0, y_0)) <= epsilon$ при $h$ близких к нулю $o$
+
+  $=> underbrace( lim_(h->0) (f'_y (x_0 + h, y_0) - f'_y (x_0, y_0))/h, (f'_y)'_x (x_0, y_0) )= f''_(x y) (x_0, y_0)$
+]
+
+#definition[
+  $f: D -> RR$, $D$ - открытое множество
+
+  $f$ $r$ раз дифф. в $D$,
+
+  Если все частные производные до $r$-ого порядка включительно существуют и непрерывны
+
+  Обозначение $f in C^r (D)$
+]
+
+#corollary[
+  Если $f in C^r (D), i_1, i_2, dots i_r$ перестановка $j_1, j_2, dots, j_r$, то $ (partial^r f)/(partial x_j_r partial x_j_(n-1) dots partial x_j_1) = (partial^r f)/(partial x_i_r partial x_i_(r-1) partial x_i_1) $
+]
+
+#proof[
+  Достаточно доказать, что для транскозиции $(j_1, j_2, dots, j_(k-1), j_(k+1), j_k, j_(k+2), dots j_r)$
+
+  $g := (partial^(k-1) f)/(partial j_(k-1) partial j_(k+2) dots partial j_1)$, $r-k+1$ непр. дифф. $(partial^2 g)/(partial x_j_(k+1) partial x_j_k) = (partial^2 g)/(partial j_k partial x_(j)_(k+1))$ и дифф. по $(partial^(r-k+1))/(partial x_j_r dots partial x_j_(k+2))$
+]
+
+#definition[
+  Мультииндексы $k = (k_1, k_2, dots, k_m), k_1, k_2, dots, k_m$ - неотрицательные целые
+
+  Высота мультииндекса $abs(k):= k_1 + k_2 + dots + k_m$
+
+  $k! = k_1 ! k_2 ! dots k_m !$
+
+  Если $h in RR^m$, то $h^k := h_1^(k_1) h_2^(k_2) dot dots dot h_m^(k_m)$
+
+  Если $f: D -> RR$, то $f^((k)) := (partial^abs(k) f)/((partial x_m)^(k_m) (partial x_(m-1))^(k_(m-1)) dots (partial x_1)^(k_1))$
+]
+
+#note-block[
+  $C_(abs(k))^(k_1, k_2, dots, k_m) = (abs(k)!)/(k_1 ! k_2 ! dots k_m !) = (abs(k)!)/k!$
+]
+
+#lemma[
+  $f: D -> RR, [x, x+h] in D$
+
+  $f in C^r (D), F(t):= f(x + t h)$
+
+  $F: [0,1] -> RR$
+
+  Тогда $F in C^r [0,1]$ и $F^((r)) (t) = sum_(abs(k) = r) (r!)/k! f^((k)) (x + t h) h^k$
+]
+
+#proof[
+  $g: D -> RR, g in C^1 (D), G(t):= g(x+t h)$
+
+  $G'(t) = g'(x+t h)(x+ t h)' = (g'_(x_1) (x+ t h), dots g'_x_m (x + t h)) vec(h_1, h_2, dots.v, h_m) = sum_(i=1)^m g'_x_i (x + t h) h_i$
+
+  $F^((r)) (t) = sum_(i_r = 1)^m sum_(i_(r-1) = 1)^m dots sum_(i_1 = 1)^m (partial f^r)/(partial x_i, partial x_i_2, dots, partial_i_r) (x+ t h) h_i_1 h_i_2 dots h_i_m = $
+
+  $k:= (\#{j:i_j = 1 }, \#(j:i_j = 2), dots, \#{j: i_j = m})$
+
+  $= sum_(abs(k) = r) r!/k!  f^((k)) (x + t h) h^k$
+]
+
+#definition[
+  формула Тейлора с остатком в форме Лагранжа $f: D -> RR, [x, x+h] subset D, f in C^r (D)$
+
+  Тогда $f(x+h) = sum_(k<= r-1) (f^((k)) (x))/k! h^k + sum_(abs(k) = r) (f^((k)) (x + theta h))/(k!) h^k$ для некоторого $theta in (0,1)$
+]
+
+#proof[
+  $F(t) := f(x + t h)$
+
+  $ F(1) = sum_(l = 0)^(r-1) (F^((l))(0))/(l!) dot 1^l + (F^((r) (theta)))/r! dot 1^r $
+
+  $ sum_(l=0)^(r-1) 1/l! sum_(abs(k) = l) l!/k! f^((k)) (x) dot h^k + 1/r! sum_(abs(k) = r) r!/k! f^((k)) (x+ theta h) h^k $
+
+  $ sum_(abs(k) <= r-1) (f^((k)) (x) )/k! dot h^k $
+]
+
+#definition[
+  Многомерная формула Тейлора с остатком в форме Пеано $f: D -> RR, [x,x+h] subset D, f in C^r (D)$
+
+  Тогда $f(x+h) = sum_(abs(k) <= r-1) (f^((k)) (x))/k! h^k + o(norm(h)^r)$ при $h-> 0$
+]
+
+#proof[
+
+  $f(x+h) = sum_(abs(k) <= r) (f^((k) (x)))/k! h^k + underbrace( sum_(abs(k) = r) ((f^((k))(x+theta h))/k! h^k - (f^((k)) (x))/k! h^k), =^? o(norm(h)^k) )$
+
+  $h^k/norm(h)^r = (h_1^(k_1) h_2^(k_2) dots h_m^(k_m))/(norm(h)^(k_1) norm(h)^(k_2) dots norm(h)^(k_m)) => norm(h^k)/norm(h^r) <= 1$
+
+  Надо доказать, что $lim_(h->0) 1/norm(h)^r (f^((k)) (x+ theta h) - f^((k)) (x)) h^k = 0$
+]
+
+= Обратная и неявная функции
+
+#theorem[Банаха о сжатии][
+  $(X, rho)$ - полное метрическое пространство
+
+  $f: X -> X$ сжатие с коэфф. $lambda in (0,1)$, такое что $rho(f(x), f(y)) <= lambda rho(x,y) forall x, y$
+
+  Тогда у $f$ существует единственная неподвижная точка $x_*$. Более того, если $x_n = f(x_(n-1))$,то $x_n -> x_*$
+ ]
+
+#proof[
+  Единственность
+
+  $f(x_*) = x_*$ и $f(y_*) y_*$, то $rho(x_*, y_*) = rho(f(x_*), f(y_*)) <= lambda rho(x_*, y_*)$ - противоречие
+
+  Существование
+
+  Возьмем $x_0 in X$ и будем итерировать: $x_(n+1) = f(x_n)$
+
+  Давайте проверим, что $x_n$ - фундаментальная последовательность
+
+  $rho(x_n, x_(n+k)) = rho(f(x_(n-1)), f_(x+k-1)) <= lambda rho(x_(n-1), x_(n+k-2)) <= lambda^2 (x_(n-2), x_(n+k-2)) <= dots <= lambda^n rho(x_0, x_k) = (rho(x_0, x_1))/(1-lambda) dot lambda^n$
+
+  $rho(x_0, x_k) <= rho(x_0, x_1) + rho(x_1, x_2) + dots + rho(x_(k-1), x_k) <= (1+lambda + lambda^2 + dots + lambda^(k-1)) rho(x_0, x_1) <= 1/(1-lambda)(rho(x_0, x_1))$
+
+  Проверим, что $f(x_*) = x_*: f(x_*) = f(lim x_n) = lim f(x_n) = lim x_(n+1) = x_*$
+]
