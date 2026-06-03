@@ -1725,3 +1725,233 @@ $f''_(x y) = f''_(y x)$
 
   Проверим, что $f(x_*) = x_*: f(x_*) = f(lim x_n) = lim f(x_n) = lim x_(n+1) = x_*$
 ]
+
+#corollary[
+  $x_(n+1) = f(x_n)$, тогда $phi(x_n, x_*) <= lambda^n/(1-lambda) (phi x_0, x_1)$ $x_*$ - неподвижная точка
+]
+
+#corollary[
+  $X$ - полное метрическое пространство, $g, f: X -> X$ - сжатия с коэффициентом $lambda in (0,1)$. $x_*$ и $y_*$ их неподвижные точки
+
+  Тогда $phi(x_*, y_*) <= (rho(f(x_*), g(x_*)))/(1-lambda)$
+]
+
+#proof[
+  $rho(x_*, y_*) = rho(f(x_*), g(x_*)) <= rho(f(x_*), g(x_*)) + underbrace(rho(g(x_*), g(y_*)), <= lambda rho(x_*, y_*))$
+
+  $(1-lambda)rho(x_*, y_*) <= rho(f(x_*), g(x_*))$
+]
+
+#note-block[
+  $A: RR^n -> RR^n$ линейный оператор, обратимый
+
+  Тогда $norm(A x) >= (norm(x))/(norm(A^(-1)))$
+
+  $x = A^(-1)(A x), norm(x) = norm(A^(-1) (A x)) <= norm(A^(-1)) dot norm(A x)$
+]
+
+#theorem[
+  $A: RR^n -> RR^n$ и $norm(A x) >= m norm(x) forall x in RR^n$
+
+  Тогда $A$ обратим и $norm(A^(-1)) <= 1/m$
+]
+
+#proof[
+  Надо понять, что $A x = 0$ имеет только нулевое решение
+
+  $0 = norm(A x) >= m norm(x) => norm(x) = 0 => x = 0$
+
+  $x = A y$
+  
+  $norm(A^(-1) x) = norm(A^(-1) (A y)) = norm(y) <= (norm(A y))/m = norm(x)/m$
+
+  $norm(A^(-1)) = sup_(x!=0) norm(A^(-1) x)/norm(x) <= 1/m$
+]
+
+#theorem[Об обратимости операторов, близких к обратимым][
+  $A: RR^n -> RR^n$ обратимый лин. оператор. $B: RR^n -> RR^n$ лин. оператор, такой что $ norm(B - A) < 1/(norm(A^(-1))) $ 
+
+  Тогда
+  + $B$ - обратим и $B^(-1) <= 1/(1/norm(A^(-1))-norm(B-A))$
+
+  
+  + $norm(B^(-1) - A^(-1)) <= (norm(B-A) norm(A^(-1)))/(1/norm(A^(-1)) - norm(B-A))$
+]
+
+#proof[
+  1. $norm(B x) = norm(A x + (B - A) x) >= underbrace( norm(A x), >= norm(x)/norm(A^(-1)) ) - underbrace(norm((B-A) x), <= norm(B-A)dot norm(x)) >= norm(x) underbrace( (1/norm(A^(-1)) - norm(B-A)), =:)$
+
+  2. $B^(-1) - A^(-1) = B^(-1)(A-B)A^(-1)$
+
+  $norm(B^(-1) - A^(-1)) <= norm(B^(-1)) norm(A - B) norm(A^(-1)), norm(B^(-1)) <= 1/(1/norm(A^(-1)) - norm(B - A))$
+]
+
+#corollary[
+  $A: RR^n -> RR^n$ обратимый линейный оператор, $B_j : RR^n -> RR^n$, такие что $B_j -> A$ (то есть $norm(B_j - A) -> 0$)
+
+  Тогда $B_j^(-1) -> A^(-1)$ (то есть $norm(B_j^(-1) - A^(-1)) -> 0$)
+]
+
+#proof[
+  $norm(B_j^(-1) - A^(-1)) <= (norm(B_j - A) norm(A^(-1)))/(1/norm(A^(-1))- norm(B_j - A)) -> 0$
+]
+
+#theorem[
+  $f: B_r (a) -> RR^n$ и $norm(d_* f) <= C forall x in B_r (a)$
+
+  Тогда $forall x,y in B_r (a): norm(f(x) - f(y)) <= C norm(x-y)$
+]
+
+#proof[
+  $phi(t):= chevron f(x+t(y-x)), f(y)-f(x) chevron.r, phi: [0,1] -> RR$, $phi$ дифф. функция $phi'(t) = chevron f'(x+t(y-x)) dot (y-x), f(y) - f(x) chevron.r$
+
+  $phi(1) - phi(0) = chevron f(y), f(y) - f(x) chevron.r - chevron f(x), f(y) - f(x) chevron.r = norm(f(y) - f(x))^2$
+
+  Можно считать, что $f(x) != f(y)$
+
+  $norm(f(y) - f(x))^2 = phi(1) - phi(0) = phi'(theta) = chevron f'(x+theta(y-x))(y-x), f(y) - f(x) chevron.r <= norm(underbrace(f'(x+theta(y-x)), <= norm(d_(x+theta(x-y)) f) norm(y-x) <= C norm(y-x)) dot (y-x) ) dot norm(f(y) - f(x)) <= C norm(y-x) norm(f(y) - f(x))$
+  
+
+]
+
+#theorem[об обратной функции][
+  $f: D -> RR^n, D$ - открыто, $a in D$, $f$ непрерывное дифф, $d_a f =: A$ - обратим.
+
+  Тогда существует $U$ и $V$ - окрестности точек $a$ и $b:= f(a)$, такое что $f: U -> V$ биекция и $f^(-1): V -> U$ - непрерывно дифф. отображение
+
+  Типо можем локально обратить функцию
+]
+
+#proof[Часть 1][
+Существование окрестностей и непрер. $f^(-1)$
+
+Возьмем такое $r>0$, что $norm(A^(-1)) norm(f'(x) - A) < 1/2 forall x in B_r (a)$
+
+$G_y (x):= x + A^(-1)(y - f(x))$ ($y$ фиксировано)
+
+$G'_y (x) = E + A^(-1)(-f'(x)) = E - A^(-1)(f'(x)) = A^(-1) (A - f'(x))$
+
+$norm(G'_y (x)) <= norm(A^(-1)) norm(A-f'(x)) < 1/2$ если $x in overline(B)_r (a)$
+
+по предыдущей теореме если $x, overline(x) in overline(B)_r (a)$, то $norm(G_y (x) - G_y (overline(x))) <= norm(x-overline(x))/2$
+
+Проверим $y in B_R (b)$ Подберем такое $R > 0$, что $G_y: overline(B)_r (a) -> B_r (a)$
+
+Возьмем $x in overline(B)_r (a), norm(G_y (x) - a) = norm(G_y (x) - G_y (a) + G_y (a) - a) <= underbrace(norm(G_y (x) - G_y (a)), norm(x-a)/2 <= r/2) + underbrace(norm(G_y (a) - a), A^(-1)(y-f(a)) = A^(-1)(y-b)) <= r/2 + norm(A^(-1) (y-b)) <= r/2 + norm(A^(-1)) (y-b) < r/2 + R norm(A^(-1)) < r$ выберем $R>0$, чтобы такое неравенство выполнялось
+
+Следовательно $G_y : overline(B)_r (a) -> B_r (a)$ - сжатие с коэфф. $1/2$ если $y in B_R (a)$
+
+Тогда у $G_y$ существует неподвижная точка $x_y$
+
+$x_y = G_y (x_y) = x_y + A^(-1)(y- f(x_y)) => A^(-1) (y-f(x_y)) = 0 => y = f(x_y)$
+
+$=> f(B_r (a)) supset B_R (b)$
+
+$V:= B_R (b)$ и $U:= B_r (a) inter f^(-1) (V)$ $f^(-1)$ открыто, так как прообраз открытого
+
+$=> f: U-> V$ биекция
+
+Проверим, что обратное отображение непрерывно
+
+$y, overline(y) in V, x in f^(-1)(y)$ и $overline(x) = f^(-1) (overline(y))$, тогда $G_y (x) = x$ и $G_overline(y) (overline(x)) = overline(x)$
+
+$norm(x-overline(x)) <= 1/(1-1/2) dot norm(G_y (x) - G_overline(y) (x)) = 2 norm((x+A^(-1)(y-f(x))) - (x+ A^(-1) (overline(y) - f(x))) ) = 2 norm(A^(-1) (y-overline(y))) <= 2 norm(A^(-1)) norm(y-overline(y))$
+
+$norm(f^(-1) (y) - f^(-1) (overline(y))) = norm(x-overline(x))$
+]
+
+#proof[Часть 2][
+  Непрер. дифф $f^(-1)$
+
+  $f(x+h) = f(x) + f'(x) dot h + alpha(h) dot norm(h), alpha(h) ->_(h->0) 0$
+
+  $f'(x) =: T$
+
+  $f(x) = y, k = f'(x)h + alpha(h) norm(h)$
+
+  $f^(-1) (y + k) = x + h = f^(-1) (y) + h = f^(-1)(y) + T^(-1)k + o(norm(k)) => f^(-1)$ дифф. в точке $y$
+
+  Надо понятЬ, что $h = (f'(x))^(-1)k + o(norm(h))$
+
+  Знаем, что если $k-> 0$, то $h-> 0$ (это непрерывность $f^(-1)$)
+
+  $norm(k) = norm(T h + alpha(h) norm(h)) >= norm(T h) - abs(alpha(h)) norm(h) >= norm(h)/norm(T^(-1)) - abs(alpha(h)) norm(h) = norm(h) (1/norm(T^(-1)) - abs(alpha(h)))> 0$ при малых $k$
+
+  $h - T^(-1) k = h - T^(-1) (T h + alpha(h) norm(h)) = h - h - T^(-1) (alpha(h) norm(h)) = -norm(h) T^(-1) (alpha(h))$
+
+  $norm(h - T^(-1)k) = norm(h) norm(T^(-1)(alpha(h))) <= norm(h) norm(T^(-1)) norm(alpha(h)) = o(norm(k))$ 
+]
+
+#corollary[
+  $f: D -> RR^n$ непрерывна дифф и $f'(x)$ обратимо $forall x in D$
+
+  $G subset D$ - открытое
+
+  Тогда $f(G)$ - открытое
+]
+
+#proof[
+  возьмем $b in f(G)$ хотим доказать, что она внутренняя 
+  
+  $=>$ найдется $a in G$, такая, что $b = f(a)$ и $f'(a)$ обратим
+
+  $=>$ по теореме об обратной функции $exists U$ и $V$ окрестности точек $a$ и $b$, такие что $f: U -> V$ - биекция
+  
+  $=> V subset f(G)$, $b$ внутрення точка $f(G)$
+]
+
+#theorem[Утверждение][
+  $A: RR^(n + m) -> RR^n$ линейное $RR^(n+m) = RR^n times RR^m, (a,b) a in RR^n, b in RR^m$
+
+  Если из условия $A(h,0) = 0$ следует, что $h = 0$
+
+  Тогда уравнение $A(x,y) = 0$ имеет единственное решение при любом фиксрованном $y subset RR^m$
+]
+
+#proof[
+  $A(x,y) = 0, A(x,0) + A(0,y) = A(x,y)$
+
+  $A(x,0) = - A(0,y), A(dot,0): RR^n -> RR^n$ линейное
+]
+
+#theorem[о неявной функции][
+  $f: D -> RR^n, D$ открытое $(a,b) in D$
+
+  $f$ непрерывно дифф и $A:= f'(a, b)$ удовлетворяла условию $A(h,0) = 0 => h =0$
+
+  Тогда сущетсвуют $W subset RR^m$ окрестность точки $b$ и функция $g: W -> RR^n$, такая что $g(b) = a$ и $f(g(y),y) = 0 forall y in W$, причем функция $g$ будет непрерывно дифф.
+
+  Такая функция $g$ единственна
+]
+
+#proof[
+  Рассмотри функция $F(x,y) = (f(x,y), y)$ (по первым координатам это $f(x,y)$, по последним $y$)
+
+  $F: D -> RR^(n+m)$
+
+  $F(a,b) = (f(a,b), b) = (0,b)$
+
+  $F' = mat(f'_x, f'_y;0, E)$ непрер. дифф $F'(a,b)$ обратимо?
+
+  $det F'(a,b) = det f'_x (a,b)$
+
+  $0 = (f'_x | f'_y)vec(h,0) = f'_x h => h =0$ то есть $det f'_x != 0$
+
+  то есть выполнены условия Т. об обратной функции $=> exists U$ - окрестность $(a,b)$ и $V$ - окрестность точки $(0,b)$, т. ч. $F: U-> V$ биекция и $G:= F^(-1): V -> U$ непрер. дифф.
+
+  $G(z,t) = (phi(z,t), psi(z,t)), (z,t) = F(G(z,t)) = F(phi(z,t), psi(z,t)) = (f(phi(z,t), psi(z,t)), psi(z,t)) => psi(z,t) = t => f(phi(z,t), t) = z$
+
+  ${0} times W subset V, W$ - окрестность точки $b$
+
+  $w in W, (0,w) subset V$ и его можно подставлять в формулу $f(phi(z,t),t) = z$
+
+  тогда $f(phi(0,w),w) = 0$
+
+  Берем $g(w):= phi(0,w)$
+
+  $g(b) = phi(0,b) = a$
+
+  $f(g(w),w) = 0$ и $g$ непрерывно дифф. так как $phi$ непрерывно дифф
+
+  $f(x,y) = 0$ и $f(overline(x),y) = 0 => x = overline(x)$, так как $F(x,y) = (0,y) = F(overline(x),y)$, но $F$ - биекция, следовательно $x = overline(x)$ 
+]
