@@ -318,3 +318,289 @@ $X \\ inter.big_(alpha in I) A_alpha = union.big_(alpha in I) (X \\ A_alpha)$
 #definition[
   Борелевская $sigma$-алгебра $cal(B)^n$ - борелевская оболочка всех открытых множеств в $RR^n$
 ]
+
+#definition[$R$ - кольцо множеств, если из того, что $A, B in R$ следует, что $A union B, A inter B, A \\ B in R$]
+
+#note[
+  Если добавить условие $X in R,$ то $R$ будет алгеброй
+]
+
+#definition[
+  $P$ - полукольцо, если:
+  - $emptyset in P$
+  - $forall A, B in P => A inter B in P$
+  - $forall A, B in P => exists Q_1, Q_2, dots, Q_m in P$, такие что $A \\ B = union.sq.big_(k=1)^m Q_k$
+]
+
+#example[
+  #image("AISelect_20260913_090729_Samsung Notes.jpg")
+]
+
+#lemma[
+  $ union.big_n A_n = union.sq.big_n (A_n \\ union.big_(k=1)^(n-1) A_k)$
+]
+
+#proof[
+  Обозначим $B_n := A_n \\ union.big_(k=1)^(n-1) A_k$
+
+  Дизъюктность $B_n$:
+
+  $B_m subset A_m$ и если $m < n$, то $B_n subset A_n \\ A_m subset A_n \\ B_m => B_n inter B_m = emptyset$
+
+  "$supset$" очевидно $A_n supset B_n$
+
+  "$subset$" Возьмем $x in union.big_n A_n$, тогда $x in A_n$ для какого-то $n$. Пусть $k$ - наименьший индекс, для которого $x in A_k => x in B_k => x in union.sq B_k$
+]
+
+#theorem[
+  $P$-полукольцо. Тогда:
+  - Если $P, P_1, dots, P_n in P$, то $P \\ union.big_(k=1)^n P_k = union.sq.big_(j=1)^m Q_j$ для некоторых $Q_j in P$
+  - Если $P_1, P_2, dots, P_n in P$, то $union.big_(k=1)^n P_k = union.big.sq_(k=1)^n union.big.sq_(j=1)^(m_k) Q_(k j)$, где $Q_(k j) in P$ и $Q_(k j) subset P_k$ (нарезаем $P$ на $Q$)
+]
+
+#proof[
+  1. Докозательство индукцией по $n$. \ База - определение полукольца \ Переход $n -> n+ 1$ \ $P \\ union.big_(k=1)^(n+1) P_k = (P \\ union.big_(k=1)^n P_k) \\ P_(n+1) = union.big.sq_(j=1)^n Q_j \\ P_(n+1) = union.big.sq_(j=1)^m union.big.sq_(i=1)^m_j Q_(j i)$ (можно перенумеровать и все получится) P.S один переход мы делаем по индукции, второй мы делаем по определению
+
+  2. $union.big_(k=1)^n P_k = union.big.sq_(k=1)^n (P_k \\ union.big_(j=1)^(k-1) P_j) = union.big.sq_(k=1)^n union.big.sq_(j=1)^m_k Q_(k j)$ в частности $Q_(k j) subset P_k$ здесь используем пункт 1
+]
+
+#definition[
+  $cal(A)$ семейство подмножеств $X$, $cal(B)$ - семейство подмножеств $Y$
+
+  Декартово произведение $cal(A) times cal(B) := {A times B: A in cal(A), B in cal(B)}$ - семейство подмножеств $X times Y$
+]
+
+#theorem[
+  Декартово произведение полуколец - полукольцо
+]
+
+#proof[
+  $cal(P)$ и $cal(Q)$ - полукольца, $P, P' in cal(P), Q, Q' in cal(Q)$
+
+  $(P times Q) inter (P' times Q') = (P inter P') times (Q inter Q')$
+
+  $(P times Q) \\ (P' times Q') = ((P \\ P') times Q) union.sq ((P inter P') times (Q \\ Q')) = (inter.big.sq_(j=1)^n P_j times Q) inter.sq ((P inter P') times union.big.sq_(i=1)^m Q_i)$
+]
+
+#definition[
+  В $RR^m$ замкнутый параллелепипед. $a, b in RR^m$ $[a,b] := [a_1, b_1] times [a_2, b_2] times dots times [a_m, b_m]$
+
+  Открытый параллелепипед очев
+
+  Ячейка --- $(a, b] := (a_1, b_1] times (a_2, b_2] times dots times (a_m, b_m]$
+]
+
+#theorem[
+  Непустая ячейка представляется в виде возрастающей последовательности замкнутых параллелепипедов, а также в виде убывающей последовательности открытх параллелепипедов
+]
+
+#proof[
+  $(a, b]$ - ячейка
+
+  $U_n := (a_1, b_1 + 1/n) times dots times (a_m, b_m + 1/n)$
+
+  $U_1 supset U_2 supset dots supset (a, b]$
+
+  $inter.big_(n=1)^oo U_n = (a,b]$
+
+  $B_n := [a_1 + 1/n, b_1] times dots times [a_m + 1/n, b_m]$
+
+  $B_1 subset B_2 subset dots subset (a,b]$
+
+  $union.big_(n=1)^oo B_n = (a,b]$
+  #image("AISelect_20260913_120525_Samsung Notes.jpg",  width: 5cm)
+]
+
+Обозначение $cal(P)^m$ - семейство ячеек из $RR^m$
+
+$cal(P)_QQ^m$ - семейство ячеек из $RR^m$, все координаты всех вершин у которых рациональны
+
+#theorem[
+  $cal(P)^m$ и $cal(P)_QQ^m$ - полукольца
+]
+
+#proof[
+  $cal(P)'$ и $cal(P)'_QQ$ - полукольца и индукционный переход с помощью теоремы о декартовом произведении полуколец $cal(P)^(m+1) = cal(P)^m times cal(P)'$
+]
+
+#theorem[
+  Любое непустое открытое множество в $RR^m$ представляется в виде счетного дизъюнктного объединения ячеек
+
+  Более того ячейки можно выбрать так, что их вершины двоично-рациональны (представляются в виде$m/2^n$)
+]
+
+#proof[
+  $G$ - открытое
+
+  $x in G =>$ найдется $B$ - открытый шар с центорм в $x$, тако что $x in B subset G$
+  #image("AISelect_20260913_134416_Samsung Notes.jpg", width: 5cm)
+
+  $=>$ найдется ячейка $A_x$, такая, чт координаты вершин двоично-рациональны и $x in A_x subset B_x subset G$
+
+  $union.big_(x in G) A_x = G$
+
+  Различных множеств $A_x$ не более чем счетно, выкенем повторы и останется не более чем счетное объединение
+
+  $union.big_"нбсч" A_x = G$
+
+  $union.big.sq_j Q_j$ - теорема о свойствах полукольца
+
+  *Конструктивное доказательство:*
+
+  #image("AISelect_20260913_134924_Samsung Notes.jpg",    width: 3.7cm)
+]
+
+#corollary[
+  $cal(B) (cal(P)_QQ^m) = cal(B) (cal(P)^m) = cal(B)^m$
+]
+
+#proof[
+  1. ($cal(B) (cal(P)_QQ^m) subset cal(B) (cal(P)^m)$) \ $cal(P)_QQ^m subset cal(P)^m subset cal(B) (cal(P)^m)$ --- $sigma$-алгебра, отсюда по минимальности $cal(B) (cal(P)_QQ^m) subset cal(B) (cal(P)^m)$
+  2. ($cal(B) (cal(P)^m) subset cal(B)^m$) \ $cal(P)^m subset cal(B)^m$ \ ячейка - счетное пересечение открытых пар $=>$ ячейка $in cal(B)^m$
+
+  3. ($cal(B)^m subset cal(B) (cal(P)_QQ^m)$) \ Рассмотрим открытое множество $G$ \ $G in cal(B)^m (cal(P)_QQ^m)$ --- $sigma$-алгебра \ $=> cal(B)^m subset cal(B)^m (cal(P)_QQ^m)$
+]
+
+== Объем и меры
+
+#definition[
+  $cal(P)$ - полукольцо, $mu: cal(P) -> [0; +oo]$
+
+  $mu$ --- объем, если
+  + $mu emptyset = 0$
+  2. Если $P, P_1, dots, P_n in cal(P), P = union.big.sq_(k=1)^n P_k, mu P = sum_(k=1)^n mu P_k$ - конечная аддитивность
+
+  $mu$ --- мера, если
+  + $mu emptyset = 0$
+  + Если $P, P_1, P_2, dots in cal(P), P = union.big.sq_(k=1)^oo P_k$, то $mu P = sum_(k=1)^oo mu P_k$ - счетная аддитивность
+]
+
+#note[
+  $mu$ --- мера $=> mu$ --- объем
+]
+
+#exercise[
+  Если $mu equiv.not +oo$ и конечно (счетно), то $mu emptyset = 0$ 
+]
+
+#example[объемы][
+  + $cal(P)^1, mu (a,b] := b - a$ --- длина ячейки
+  + $g: RR -> RR$ нестрого возрастает, $cal(P)^1, nu_g (a,b] := g(b) - g(a)$
+  + $cal(P^m)" "lambda_m (a,b] = (b_1 - a_1) (b_2 - a_a) dots (b_m - a_m)$ --- классический объем
+  + $x_0 in x, a > 0, 2^X$ \ $mu A := cases(0" если " x_0 in.not A, a" если " x_0 in A)$
+  + Алгебра подмножеств $RR^2$, состоящая из всех ограниченных множеств и их дополнений \ $mu A = cases(0" если" A "- ограниченное множество",1" если" A "- неограниченное множество")$ --- объем, о не мера
+]
+
+#theorem[Свойства объема][
+  $mu: cal(P) -> [0; +oo]$ объем на полукольце
+
+  + Если $P', P in cal(P)$, такие что $P' subset P$, то $mu P' <= mu P$
+  + (усиленная монотонность) Если $P, P_1, P_2, dots, P_n in cal(P)$, $P supset union.big.sq_(k=1)^n P_k$, то $mu P >= sum_(k=1)^n mu P_k$
+  2'. Если $P, P_1, P_2, dots in cal(P)$, $P supset union.big.sq_(k=1)^oo P_k$, то $mu P >= sum_(k=1)^oo mu P_k$
+  3. (полуаддитивность) Если $P, P_1, dots, P_n in cal(P)$ и $P subset union.big_(k=1)^n P_k$, то $mu P <= sum_(k=1)^n mu P_k$
+]
+
+#proof[
+  Из 2 следует 1, так что доказываем сразу второе:
+
+  $P \\ union.big.sq_(k=1)^n P_k = union.big.sq_(j=1)^m Q_j$ для некоторых $Q_j in cal(P)$
+
+  $=> P = union.big.sq_(k=1)^n P_k union.sq union.sq.big_(j=1)^m Q_j => mu P = sum_(k=1)^n mu P_k + sum_(j=1)^m mu Q_j >= sum_(k=1)^n mu P_k$
+
+  2'. $P supset union.big.sq_(k=1)^oo P_k supset union.big.sq_(k=1)^n P_k => mu P >= sum_(k=1)^n mu P_k$ и предельный переход в неравенстве
+
+  3 . $P'_k ;= P_k inter P => P = union.big_(k=1)^n P'_k = union.big.sq_(k=1)^n union.big.sq_(j=1)^m_k Q_(k j)$, где $Q_(k j) subset P'_k subset P_k$
+
+  $=> mu P = sum_(k=1)^n underbrace(sum_(j = 1)^m_k mu Q_(k j), <= mu P_k) <= sum_(k=1)^n mu P_k$
+
+  $Q_(k j) subset P_k => union.big.sq_(j=1)^m_k Q_(k j) subset P_k => sum_(j=1)^m_k mu Q_(k j) <= mu P_k$
+]
+
+#note[
+  1. Если $mu$ - объем на кольце $R$, $A, b in R$, $A subset B$ и $mu A < +oo$, то $mu(B\\A) = mu B - mu A$ \ $B = (B\\ A) union.sq.big A, mu B = mu(B \\ A) + mu A$
+
+  2. $mu$ - объем на полукольце $cal(P)$ \ $R:= {union.big.sq_(j=1)^m P_j : P_j in cal(P)}$ - кольцо \ Можно доопределить $mu$ на $R$: \ $mu (union.big.sq_(j=1)^m P_j) = sum_(j=1)^m mu P_j$
+]
+
+#theorem[
+  $cal(P), cal(Q)$ - полукольца подмножеств $X$ и $Y$
+
+  $mu$ и $nu$ - объемы на $cal(P)$ и $cal(Q)$
+
+  $lambda (P times Q) := mu P dot nu Q$, считаем, что $0 dot (+ oo) = 0$
+
+  $lambda$ - объем
+]
+
+#proof[
+  *случай 1 (простой)*
+  $P = union.sq.big_(j=1)^m P_j, Q = union.big.sq_(k=1)^n Q_k$
+
+  $P times Q = union.big.sq_(j=1)^m union.big.sq_(k=1)^n P_j times Q_k$ и надо доказать, что $lambda(P times Q) = sum_(j=1)^m sum_(i = 1)^n lambda(P_j times Q_k)$
+
+  $mu P = sum_(j=1)^m mu P_j$ и $nu Q = sum_(k=1)^n nu Q_k$
+
+  $lambda(P times Q) = mu P dot nu Q = sum_(j=1)^m mu P_j dot sum_(k=1)^n nu Q_k = sum_(j=1)^m sum_(k=1)^n (mu P_j dot nu Q_k) = sum_(j=1)^m sum_(k=1)^n lambda(P_j times Q_k)$
+
+  #image("AISelect_20260913_145126_Samsung Notes.jpg", width: 3cm) - когда вот так вот красивенько все разделилось на квадратики
+
+  *случай 2 (общий)*
+
+  #image("AISelect_20260913_145223_Samsung Notes.jpg", width: 3cm) - а здесь вообще не красиво разделилось(
+
+  $P times Q = union.big.sq_(k=1)^n P_k times Q_k$
+
+  $=> P = union_(k=1)^n P_k = union.big.sq_(k=1)^n' P'_k$
+
+  $Q = union_(j=1)^m Q_j = sum_(j=1)^m' Q'_j$
+
+  $lambda(P times Q) = sum_k sum_j lambda(P'_k times Q'_k)$
+]
+
+#example[мер][
+  + классическимй обхем - мера (потом докажем)
+  + $cal(P'), g: RR-> RR$ нестрого возрастает и непрерывна справа $nu_g (a,b]:= g(b) - g(a)$ --- мера
+  + $x_0 in x, a > 0,$ \ $mu A := cases(0" если " x_0 in.not A, a" если " x_0 in A)$ - мера
+  + считающая мера \#$A$ - количество элементов в множестве $A$
+  + $X$ - произвольное множемтво множество $T:= {t_1, t_2, dots} subset X$ \ $w_1, w_2, dots >= 0, mu A := sum_(j: t_j in A) w_j$ #image("AISelect_20260913_145933_Samsung Notes.jpg", width: 6cm)
+]
+
+#theorem[классический объем][
+  $mu$ - мера
+]
+
+#proof[
+  $A = union.sq.big_(n=1)^oo A_n, mu A_n = sum_(j=1)^oo w_(n j)$
+
+  $sum_(n=1)^oo mu A_n = sum_(n=1)^oo sum_(j=1)^oo w_(n j) =^? sum w_(n g) = mu A$
+
+  "$<=$" $sum_(n=1)^N sum_(j=1)^J w_(n j) <= sum w_(n j) => sum_(n=1)^oo sum_(j =1)^J w_(n j) <= sum w_(n j)$
+
+  $=> sum_(j =1)^oo sum_(n=1)^oo w_(n j) <= sum w_(n j)$
+
+  "$>=$" $S$ - частичная сумма для $sum w_(n j)$
+
+  $=> sum_(n = 1)^N sum_(j = 1)^n w_(n j) >= S$ для некоторых $N$ и $J$,
+  
+  $sum_(n=1)^oo sum_(j=1)^oo w_(n j) >= sum_(n=1)^n sum_(j=1)^oo w_(n j) >= sum_(n=1)^N sum_(j = 1)^J w_(n j) >= S$
+]
+
+#theorem[
+  $mu$ - объем на полукольце $cal(P)$
+
+  Тогда $mu$ - мера $<=>$ (счетная полуаддитивность) $P, P_1, P_2, dots in cal(P)$, такие что $P subset union.big_(k=1)^oo P_k$ тогда $mu P <= sum_(k=1)^oo mu P_k$
+]
+
+#proof[
+  "$<==$" $P = sum_(k=1)^oo P_k$, $mu$-объем $=> mu P >= sum_(n=1)^oo mu P_n$
+
+  счетная полуаддитивность $=> mu P <= sum_(n=1)^oo mu P_n$
+
+  "$==>$" $P'_k := P_k inter P in cal(P)$
+
+  $P = sum_(k=1)^oo P'_k = sum_(k=1)^oo sum_(j=1)^m_k Q_(k j) => mu P  sum_(k =1)^oo sum_(j=1)^m_k mu P_(k j) <= sum_(k=1)^oo mu P_k$
+
+  $Q_(k j) in cal(P)$ и $Q_(k j) subset P'_k subset P_k => union.big.sq_(j=1)^m_k Q_(k j) subset P_k$
+
+  $=> sum_(j=1)^m_k mu Q_(k j) <= mu P_k$
+]
