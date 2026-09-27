@@ -12,3 +12,7 @@ mathAnalisysModule4 - догадайтесь по названию. На раз�
 
 
 mathAnalisysModule5 - тоже догадайтесь по названию. Ответ: (qɯdǝʚɯǝҺ ʁɐʚdǝu ‘ɔdʎʞ n̯оdоɯʚ) ʁvʎɓоw оɹоɯʁu ииǹʞǝv
+
+# Билеты по матану:
+
+Пятый модуль [здесь](https://typst.app/project/rZaj3CndriorwL4V5MXMek)
