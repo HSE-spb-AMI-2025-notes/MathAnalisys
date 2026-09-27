@@ -517,7 +517,7 @@ $cal(P)_QQ^m$ - семейство ячеек из $RR^m$, все координ
 ]
 
 #note[
-  1. Если $mu$ - объем на кольце $R$, $A, b in R$, $A subset B$ и $mu A < +oo$, то $mu(B\\A) = mu B - mu A$ \ $B = (B\\ A) union.sq.big A, mu B = mu(B \\ A) + mu A$
+  1. Если $mu$ - объем на кольце $R$, $A, B in R$, $A subset B$ и $mu A < +oo$, то $mu(B\\A) = mu B - mu A$ \ $B = (B\\ A) union.sq.big A, mu B = mu(B \\ A) + mu A$
 
   2. $mu$ - объем на полукольце $cal(P)$ \ $R:= {union.big.sq_(j=1)^m P_j : P_j in cal(P)}$ - кольцо \ Можно доопределить $mu$ на $R$: \ $mu (union.big.sq_(j=1)^m P_j) = sum_(j=1)^m mu P_j$
 ]
@@ -602,5 +602,263 @@ $cal(P)_QQ^m$ - семейство ячеек из $RR^m$, все координ
 
   $Q_(k j) in cal(P)$ и $Q_(k j) subset P'_k subset P_k => union.big.sq_(j=1)^m_k Q_(k j) subset P_k$
 
-  $=> sum_(j=1)^m_k mu Q_(k j) <= mu P_k$
+  $=> sum_(j=1)^m_k mu Q_(k j) <= mu P_k$ (по усиленной монотонности)
+]
+
+#corollary[
+  Если $mu$ --- мера, заданная на $sigma$-алгебре, то счетное объединение множеств нулевой меры -- множество нулевой меры
+]
+
+#proof[
+  $A = union.big_(n=1)^oo A_n => mu A <= sum_(n=1)^oo mu A_m = 0$
+]
+
+#theorem[
+  $mu$ -- объем на $sigma$- алгебре $cal(A)$. Тогда $mu$-мера $<=>$ $mu$ -- непрерывна снизу, то есть $forall A_1 subset A_2 subset A_3 dots$ из $cal(A)$ верно $mu(union.big_(n=1)^oo A_n) = lim_(n->oo) mu A_n$
+]
+
+#proof[
+  "$==>$" $B_n := A_n \\ A_(n-1), A_0 = emptyset$
+
+  $union_(n=1)^oo A_n = union.big.sq_(n=1)^oo B_n => mu(union.big_(n=1)^oo A_n) = sum_(n=1)^oo mu B_n =$
+  
+  $= lim sum_(k=1)^n mu B_k = lim mu (union.big.sq_(k=1)^n B_k) = lim mu A_n$
+
+  "$<==$" $A := union.big.sq_(k=1)^oo C_k => A_n := union.big.sq C_k$
+
+  $=> A_1 subset A_2 subset dots => mu(union.big.sq_(k=1)^oo C_k) = mu A = lim mu A_n = lim sum_(k=1)^n mu C_k = sum_(k=1)^oo mu C_k$
+]
+
+#theorem[
+  $mu$ -- объем на $sigma$-аглебре $cal(A)$ и $mu X < +oo$. Тогда следующие условия равносильны:
+
+  + $mu$ -- мера
+  + $mu$ -- непрерывна сверху, то есть $A_1 supset A_2 supset A_3 supset dots$ из $cal(A)$, $mu(inter.big_(n=1)^oo A_n) = lim mu A_n$
+  + $forall A_1 supset A_2 supset dots$ из $cal(A)$, т. ч. $inter.big_(n=1)^oo A_n = emptyset$ $lim mu A_n = 0$
+]
+
+#proof[
+  "$2 => 3$" очев
+
+  "$1 => 2$" $mu$ -- мера $=>$ непрерывная снизу
+
+  $X \\ A_1 subset X \\ A_2 subset dots => mu (union.big_(n=1)^oo (X \\ A_n)) = lim mu(X \\ A_n)$
+
+  "$3 => 1$" $A:= union.big.sq_(k=1)^oo C_k$
+
+  $A_n := union.big.sq_(k = m+1)^oo C_k$, тогда $A_1 supset A_2 supset A_3 dots$
+
+  и $inter.big_(n=1)^oo A_n = emptyset$
+
+  $=> lim mu A_n = 0, A = union.big.sq_(k=1)^n C_k union.sq A_n => mu A = sum_(k=1)^n mu C_k + mu A_n$ (первое стремится к $sum_(k=1)^oo mu C_k$, второе к $0$)
+]
+
+#note[
+  Условие $mu X < + oo$ важно
+
+  Пример $RR, lambda_1$ - длина
+
+  $inter.big_(n=1)^oo (n, +oo) = emptyset, lambda_1 (n, +oo) = +oo$
+]
+
+#corollary[
+  $mu$ --- мера $A_1 supset A_2 dots, mu A_m < +oo$ для некоторого $m$
+
+  Тогда $mu(inter_(n=1)^oo A_n) = lim mu A_n$
+]
+
+#proof[
+  рассмотрим множество $A_m \\ A_k$
+]
+
+== Продолжение мер
+
+#definition[
+  $nu: 2^X -> [0, +oo]$ --- субмера, если:
+  + $nu emptyset = 0$
+  + монотонность. Если $A subset B$, то $nu A <= nu B$
+  + счетная полуадд. Если $A subset union.big_(n=1)^oo A_n$, то $nu A <= sum_(n=1)^oo nu A_n$
+]
+
+#note[
+  Из $3$ следует $2$
+]
+
+#definition[
+  $mu: cal(A) -> [0; +oo]$ --- мера на $sigma$-алгебре $cal(A)$
+
+  $mu$ - полная, если из условия, что $mu A < 0$ и $B subset A$ следует $B in cal(A)$ (и тогда $mu B = 0$)
+]
+
+#definition[
+  $nu$ -- субмера. Назовем $mu$-измеримыми такие множества $E$, что $forall A subset X: nu A = nu(A inter E) + nu (A \\ E)$
+]
+
+#note[
+  "$<=$" всегда верно из счетной полуаддитивности, то есть в определении можем писать "$>=$"
+]
+
+#note[
+  $E_1, E_2, dots$ - дизъюнктные $nu$-измеримые множества
+
+  Тогда $nu(A inter union.big.sq_(k=1)^n E_k) = sum_(k=1)^n nu (A inter E_k)$
+
+  Доказательство индукцией по $n$: $nu(A inter union.big.sq_(k=1)^n E_k) = nu(A inter union.big.sq_(k=1)^(n-1 ) E_k) + nu (A inter E) = (A inter union.big.sq_(k=1)^n E_k) \\ E_n + nu (A inter union.big.sq_(k=1)^n E_k) inter E_n$
+]
+
+#theorem[Каратеодори][
+  $nu$-измеримое множество образует $sigma$-алгебру (обозначим $cal(A)$).
+
+  Сужение $nu$ на эту $sigma$-алгебру --- полная мера
+]
+
+#proof[
+  + Если $nu E = 0$, то $E$ --- $nu$-измеримо (сейчас проверим) \ $nu(A inter E) + nu (A \\ E) <= nu E + nu A = nu A$
+
+  + Проверим, что $cal(A)$-симметричная структура: \ $E$ --- $nu$-измеримо $=> nu A = nu (A inter E) + nu(A \\ E) = nu(A inter (X \\ E)) + nu (A \\ (X \\ E))$
+
+  + Если $E$ и $F in cal(A)$, то $E union F in cal(A)$ \ $nu A = nu (A inter E) + nu (A \\ E) = nu (A inter E) + nu ((A\\E) inter F) + nu((A\\E) \ F) >= nu(A inter (E union F)) + nu(A\\(E union F)) => E union F in A$ \ Поясняющая картинка: #image("AISelect_20260927_214130_Samsung Notes.jpg", height: 4cm)
+
+  + $cal(A)$ -- алгебра
+
+  + $E_1, E_2, dots in cal(A)$ и дизъюнктны $=> E:= union.big.sq_(n=1)^oo E_n in cal(A)$ (хотим проверить) \ $nu A = nu (A inter union.big.sq_(k=1)^n  E_k) + nu(underbrace(A \\ union.big.sq_(k=1)^n E_k, supset A\\E)) >= nu(A inter union.big.sq_(k=1)^n E_k) + nu (A \\ E) = sum_(k=1)^n nu (A inter E_k) + nu (A \\ E)$
+
+  + $E_1, E_2, dots in cal(A) => union.big_(n=1)^oo E_n in cal(A)$ \ Переделаем $union E_n$ в дизъюнктное объединение $union.big.sq_(n=1)^oo (E_n \\ union.big_(k=1)^(n-1) E_k) in cal(A)$
+
+  + $cal(A)$ --- $sigma$-алгебра (полнота из первого пункта)
+  + $nu_cal(A)$ --- мера. Нужно проверить, что $nu_cal(A)$ - объем (т.к. сч. полуаддитивность есть) \ Если $E_1, E_2, dots E_n in cal(A)$, то $nu (union.big.sq_(k=1)^n E_k) = sum_(k=1)^n nu E_k$ - это замечание 2 для $A = X$
+]
+
+#definition[
+  $mu$ - мера на полукольце $cal(P)$
+
+  Внешняя мера, порожденная $mu$
+
+  $mu^* A:= inf {sum_(n=1)^oo mu P_n: P_n in cal(P) "и" A subset union.big_(n=1)^oo P_n}$
+
+  Если такого покрытия не существует, то $mu^* A = +oo$
+]
+
+#note[
+  + Можно рассмотреть лишь покрытие дизъюнктными множествами $union.big_(n=1)^oo P_n = union.big.sq_(n=1)^oo union.big.sq_(k=1)^m_n Q_(n k),$ где $Q_(n k) subset P_n$
+
+  + Если мера $mu$ задана на $sigma$-алгебре $cal(A)$, то $mu^* A = inf {mu B: B in cal(A) "и" A subset B}$
+]
+
+#theorem[
+  $mu^*$ - субмера, совпадающая с $mu$ на полукольце $cal(P)$
+]
+
+#proof[
+
+  шаг 1.
+
+  Возьмем $A in cal(P)$ и проверим, что $mu^* A = mu A$
+
+  "$>=$" $A, emptyset, emptyset, dots$ - покрытие $A$ элементами полукольца $sum_(n=1)^oo mu P_n = mu A => inf <= mu A$
+
+  "$<=$" $A subset union.big_(n=1)^oo P_n ==>_"счетная полуадд" mu A <= sum_(n=1)^oo mu P_n => mu A <= inf$
+
+  шаг 2.
+
+  $mu^*$ - счетно и полуаддитивно. $A subset union.big_(n=1)^oo A_n =>^? mu^* A <= sum_(n=1)^oo mu^* A_n$ (если есть $+oo$, то все очевидно)
+
+  $mu^* A_n = inf {sum_(k=1)^oo mu P_k: A_n subset union.big_(k=1)^oo P_k "и" P_k in cal(P)}$
+
+  Возьмем покрытие $A_n subset union.big_(k=1)^oo P_(n k)$ (можем взять благодяря $inf$), что $sum_(k=1)^oo mu P_(n k) < mu^* A_n + epsilon/2^n$
+
+  $A subset union.big_(n=1)^oo A_n subset union.big_(n=1)^oo union.big_(k=1)^oo P_(n k)$
+
+  $sum_(n=1)^oo sum_(k=1)^oo mu P_(n k) < sum_(n=1)^oo (mu^* A_n + epsilon/2^n) = epsilon + sum_(n=1)^oo mu^* A_n => mu^* A < epsilon + sum_(n=1)^oo mu^* A_n$ и $epsilon -> 0$
+]
+
+#definition[
+  $mu$ - мера на полукольце $cal(P)$
+
+  Стандартное продолжение меры с полукольца: строим внешнюю меру $mu^*$ и сужаем ее на семейство $mu^*$ - измеримых множеств
+]
+
+#theorem[
+  Это действительно продолжение, то есть множества из $cal(P)$ являются $mu^*$-измеримыми
+]
+
+#proof[
+  Надо доказать, что если $E in cal(P)$, то $mu^* A >= mu^* (A inter E) + mu(A \\ E)$
+
+  Шаг 1. $A in cal(P)$ $A \\ E = union.big.sq_(k=1)^n Q_k$ для каких-то $Q_k in cal(P)$
+
+  $mu^* A = mu A = mu (A inter E) + sum_(k=1)^n mu Q_k >= mu^* (A inter E) + mu^* (A \\ E)$
+
+  Шаг 2. $A in.not cal(P)$. Если $mu^* A = +oo$, то очевидно
+
+  Считаем, что конечно
+
+  Возьмем покрытие $A subset union_(n=1)^oo P_n$, такое что $sum_(n=1)^oo mu P_n < mu^* A + epsilon$
+
+  по шагу 1 $mu P_n = mu^* P_n >= mu^* (P_n inter E) + mu^* (P_n \\ E)$
+
+  $epsilon + mu^* A > sum_(n=1)^oo mu P_n >= sum_(n=1)^oo mu^* (P_n inter E) + sum_(n=1)^oo mu^* (P_n \\ E)$
+
+  $union.big_(n=1)^oo (P_n inter E) supset A inter E ==>_("счетная полуадд" mu^*) sum_(n=1)^oo mu^* (P_n inter E) >= mu^* (A inter E)$
+
+  $union.big_(n=1)^oo (P_n \\ E) supset A \\ E => sum_(n=1)^oo mu^* (P_n \\ E) >= mu^* (A \\ E)$
+
+  Значит $sum_(n=1)^oo mu^* (P_n inter E) + sum_(n=1)^oo mu^* (P_n \\ E) >= mu^* (A inter E) + mu^* (A \\ E), epsilon ->0$
+]
+
+#note[
+  + Дальше стандартное проложение обозначаем той же буквой, что и исходную меру
+  + Применение ст. продолжения к стандартную прололжению не дает ничего нового
+  + Можно ли продолжить меру $mu$ на более широкую $sigma$-алгебру нежели $sigma$-алгебра $mu^*$ - измеримых множеств? Обычно да, но неоднозначно
+]
+
+#definition[
+  $mu$ называется $sigma$-конечная мера, если $x = union_(n=1)^oo P_n$, где $mu P_n < +oo$
+
+  + класс объем --- $sigma$-конечная мера
+  + считающая мера на $RR$ - нет
+]
+
+#theorem[
+  $cal(P)$ - полукольцо, $mu$-ст. продолжение с $cal(P)$
+
+  $mu^*$ -- соответствующая внешняя мера $A subset X$, т.ч. $mu^* A < +oo$
+
+  Тогда найдутся $B_(n k) in cal(P)$, т. ч. $C_n := union_(k=1)^oo B_(n k), C := inter.big_(n=1)^oo C_n, C supset A$ и $mu^* A = mu C$
+]
+
+#proof[
+  $mu^* A = inf {sum_(k=1)^oo mu P_k : P_k in cal(P) "и" union_(k=1)^oo P_k supset A}$
+
+  Возьмем реализацию, а которой $inf < mu^* A + 1/n$
+
+  $B_(n k) in cal(P), C_n = sum_(k=1)^oo B_(n k) supset A$ и $ mu C_n <=sum_(k=1)^oo mu B_(n k) < mu^* A + 1/n$
+
+  $C_n supset A$ и $mu C_n < mu^* A + 1/n$
+
+  $C = inter_(n=1)^oo C_n supset A$ и $C subset C_n => mu^* A <= mu* C <= mu C <= mu C_n < mu^* A + 1/n$
+
+  $=> mu^* A = mu C$
+]
+
+#corollary[
+  $cal(P)$ - полукольцо, $mu$ -- ст. продолжение с $cal(P)$
+
+  Если $mu A < +oo$ ($A - mu^*$ измер. множество), то $A = B union.sq e$, где $B in cal(B) (cal(P))$ и $mu e =0$
+]
+
+#proof[
+  $C$ --- множество из теоремы $C supset A$ и $mu A = mu^* A = mu C => mu (underbrace(C \\ A,=:e_1)) = 0$, $C in cal(B)(cal(P))$
+
+  Подставим $e_1$ в теорему, найдется $e_2 > e_1$ $mu e_2 = 0, e_2 in cal(B)(cal(P))$
+
+  $mu (C\\ e_2) = mu C = mu A$
+
+  #image("AISelect_20260927_223011_Samsung Notes.jpg", height: 4cm)
+
+  Положим $B := C \\ e_2$ и $e := A \\ B$
+]
+
+#theorem[единственность продолжения][
+  $cal(P)$ - полукольцо, $mu$ - ст. продолжение меры с $cal(P)$ на $sigma$-алгебре $cal(A)$, $nu$-другая мера на $A$, т.ч.  $mu E = nu E, forall E in cal(P)$. Тогда если $mu$ -- $sigma$-конечная мера, то $mu A = nu A$ $forall A in cal(A)$
 ]
