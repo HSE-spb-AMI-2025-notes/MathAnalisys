@@ -572,7 +572,7 @@ $cal(P)_QQ^m$ - семейство ячеек из $RR^m$, все координ
 #proof[
   $A = union.sq.big_(n=1)^oo A_n, mu A_n = sum_(j=1)^oo w_(n j)$
 
-  $sum_(n=1)^oo mu A_n = sum_(n=1)^oo sum_(j=1)^oo w_(n j) =^? sum w_(n g) = mu A$
+  $sum_(n=1)^oo mu A_n = sum_(n=1)^oo sum_(j=1)^oo w_(n j) =^? sum w_(n j) = mu A$
 
   "$<=$" $sum_(n=1)^N sum_(j=1)^J w_(n j) <= sum w_(n j) => sum_(n=1)^oo sum_(j =1)^J w_(n j) <= sum w_(n j)$
 
@@ -580,9 +580,9 @@ $cal(P)_QQ^m$ - семейство ячеек из $RR^m$, все координ
 
   "$>=$" $S$ - частичная сумма для $sum w_(n j)$
 
-  $=> sum_(n = 1)^N sum_(j = 1)^n w_(n j) >= S$ для некоторых $N$ и $J$,
+  $=> sum_(n = 1)^N sum_(j = 1)^J w_(n j) >= S$ для некоторых $N$ и $J$,
   
-  $sum_(n=1)^oo sum_(j=1)^oo w_(n j) >= sum_(n=1)^n sum_(j=1)^oo w_(n j) >= sum_(n=1)^N sum_(j = 1)^J w_(n j) >= S$
+  $sum_(n=1)^oo sum_(j=1)^oo w_(n j) >= sum_(n=1)^N sum_(j=1)^oo w_(n j) >= sum_(n=1)^N sum_(j = 1)^J w_(n j) >= S$
 ]
 
 #theorem[
@@ -598,7 +598,7 @@ $cal(P)_QQ^m$ - семейство ячеек из $RR^m$, все координ
 
   "$==>$" $P'_k := P_k inter P in cal(P)$
 
-  $P = sum_(k=1)^oo P'_k = sum_(k=1)^oo sum_(j=1)^m_k Q_(k j) => mu P  sum_(k =1)^oo sum_(j=1)^m_k mu P_(k j) <= sum_(k=1)^oo mu P_k$
+  $P = union.big.sq_(k=1)^oo P'_k = union.big.sq_(k=1)^oo sum_(j=1)^m_k Q_(k j) => mu P =  sum_(k =1)^oo sum_(j=1)^m_k mu Q_(k j) <= sum_(k=1)^oo mu P_k$
 
   $Q_(k j) in cal(P)$ и $Q_(k j) subset P'_k subset P_k => union.big.sq_(j=1)^m_k Q_(k j) subset P_k$
 
@@ -624,7 +624,7 @@ $cal(P)_QQ^m$ - семейство ячеек из $RR^m$, все координ
   
   $= lim sum_(k=1)^n mu B_k = lim mu (union.big.sq_(k=1)^n B_k) = lim mu A_n$
 
-  "$<==$" $A := union.big.sq_(k=1)^oo C_k => A_n := union.big.sq C_k$
+  "$<==$" $A := union.big.sq_(k=1)^oo C_k => A_n := union.big.sq_(k=1)^n C_k$
 
   $=> A_1 subset A_2 subset dots => mu(union.big.sq_(k=1)^oo C_k) = mu A = lim mu A_n = lim sum_(k=1)^n mu C_k = sum_(k=1)^oo mu C_k$
 ]
@@ -640,13 +640,17 @@ $cal(P)_QQ^m$ - семейство ячеек из $RR^m$, все координ
 #proof[
   "$2 => 3$" очев
 
-  "$1 => 2$" $mu$ -- мера $=>$ непрерывная снизу
+  "$1 => 2$" 
+  
+  $mu$ -- мера $=>$ непрерывная снизу
 
   $X \\ A_1 subset X \\ A_2 subset dots => mu (union.big_(n=1)^oo (X \\ A_n)) = lim mu(X \\ A_n)$
 
-  "$3 => 1$" $A:= union.big.sq_(k=1)^oo C_k$
+  "$3 => 1$" 
+  
+  $A:= union.big.sq_(k=1)^oo C_k$
 
-  $A_n := union.big.sq_(k = m+1)^oo C_k$, тогда $A_1 supset A_2 supset A_3 dots$
+  $A_n := union.big.sq_(k = n+1)^oo C_k$, тогда $A_1 supset A_2 supset A_3 dots$
 
   и $inter.big_(n=1)^oo A_n = emptyset$
 
@@ -687,7 +691,7 @@ $cal(P)_QQ^m$ - семейство ячеек из $RR^m$, все координ
 #definition[
   $mu: cal(A) -> [0; +oo]$ --- мера на $sigma$-алгебре $cal(A)$
 
-  $mu$ - полная, если из условия, что $mu A < 0$ и $B subset A$ следует $B in cal(A)$ (и тогда $mu B = 0$)
+  $mu$ - полная, если из условия, что $mu A = 0$ и $B subset A$ следует $B in cal(A)$ (и тогда $mu B = 0$)
 ]
 
 #definition[
@@ -824,7 +828,7 @@ $cal(P)_QQ^m$ - семейство ячеек из $RR^m$, все координ
 
   $mu^*$ -- соответствующая внешняя мера $A subset X$, т.ч. $mu^* A < +oo$
 
-  Тогда найдутся $B_(n k) in cal(P)$, т. ч. $C_n := union_(k=1)^oo B_(n k), C := inter.big_(n=1)^oo C_n, C supset A$ и $mu^* A = mu C$
+  Тогда найдутся $B_(n k) in cal(P)$, т. ч. $C_n := union.big_(k=1)^oo B_(n k), C := inter.big_(n=1)^oo C_n, C supset A$ и $mu^* A = mu C$
 ]
 
 #proof[
@@ -860,5 +864,162 @@ $cal(P)_QQ^m$ - семейство ячеек из $RR^m$, все координ
 ]
 
 #theorem[единственность продолжения][
-  $cal(P)$ - полукольцо, $mu$ - ст. продолжение меры с $cal(P)$ на $sigma$-алгебре $cal(A)$, $nu$-другая мера на $A$, т.ч.  $mu E = nu E, forall E in cal(P)$. Тогда если $mu$ -- $sigma$-конечная мера, то $mu A = nu A$ $forall A in cal(A)$
+  $cal(P)$ - полукольцо, $mu$ - ст. продолжение меры с $cal(P)$ на $sigma$-алгебре $cal(A)$, $nu$-другая мера на $cal(A)$, т.ч.  $mu E = nu E, forall E in cal(P)$. Тогда если $mu$ -- $sigma$-конечная мера, то $mu A = nu A$ $forall A in cal(A)$
+]
+
+#proof[
+  $nu A <= sum_(k=1)^oo nu P_k = sum_(k=1)^oo mu P_k$
+
+  Если $A subset union.big_(n=1)^oo P_k, P_k in cal(P)$, но $mu A = inf$, значит $ nu A <= mu A " " forall A in cal(A)$
+
+  Возьмем $P in cal(P)$ знаем, что $ nu(P inter A) <= mu(P inter A)$
+
+  $nu(P \\ A) <= mu (P\\A)$
+
+  $mu P = nu P = nu (P inter A) + nu(P\\ A) <= mu(P \\ A) + mu(P \\ A) = mu P$
+
+  Если $mu P < + oo$, то $nu(P inter A) = mu(P inter A)$
+
+  $mu $ --- $sigma$-конечна $=> X = union.big.sq_(n=0)^oo P_n$, т.ч. $mu P_n < +oo$
+
+  $=> mu A = sum_(n=1)^oo mu (P_n inter A) = sum_(n=1)^oo nu (P_n inter A) = nu A$
+]
+
+== Мера Лебега
+
+#theorem[
+  $lambda_m$ (классический объем) --- мера на полукольце ячеек
+]
+
+#proof[
+  Знаем, что $lambda_m$ - объем. Поэтому достаточно проверить счетную полуаддитивность
+
+  $(a, b] subset union.big_(k=1)^oo (a_k, b_k] =>^? lambda (a,b] <= sum_(k=0)^oo lambda (a_k, b_k]$  $a,b, a_k b_k in RR^m$
+]
+
+Возьмем такое $a' in RR^m$, что $[a', b] subset (a, b]$ и $lambda (a, b] <= lambda (a', b] + epsilon$
+
+Возьмем такое $b'_k in RR^m$, что $(a_k, b_k] subset (a_k, b'_k]$ и $lambda (a_k, b'_k] < lambda (a_k, b_k] + epsilon/2^k$
+
+$[a', b] subset (a,b] subset union.big_(k=1)^oo (a_k, b_k] subset union.big_(k=1)^oo (a_k, b'_k)$
+
+Выберем конечное подпокрытие
+
+$(a', b] subset [a', b] subset union.big_(k=1)^n (a_k, b'_k) subset union.big_(k=1)^n (a_k, b'_k]$
+
+$lambda$ -- объем $=>$ конечно полуаддитивен $lambda (a, b] - epsilon < lambda (a', b] <= sum_(k=1)^n lambda (a_k, b'_k] <= sum_(k=1)^oo lambda (a_k, b'_k] <= sum_(k=1)^oo (lambda (a_k, b_k] + epsilon/2^k) = epsilon + sum_(k=1)^oo lambda (a_k, b_k]$
+
+#definition[
+  Мера Лебега - стандартное продолжение классического объема.
+
+  $cal(L)^m$ --- $sigma$-алгебра, на которой задана мера Лебега
+
+  Множество из $cal(L)$ называется измеримым (относительно меры Лебега)
+]
+
+#note[
+  $A in cal(L)^m$
+
+  $lambda A = inf {sum_(k=1)^oo "vol" P_k :P_k "- ячейка и" A subset union.big_(k=1)^oo P_k}$, vol - классический объем
+]
+
+#property[Свойства меры Лебега][
+  1. Открытые множества измеримы. Мера непустого открытого множества больше нуля \ Доказательство: $G$ - открытое $!= emptyset => exists a in G => exists r > 0: overline(B)_r (a) subset G =>$ кубическая ячейка $K subset G => 0 < lambda K <= lambda G$
+  2. Замкнутые множества измеримы. Мера объема точки равна нулю\ Доказательство: ${B} subset P_epsilon => lambda {b} = lambda P_epsilon= epsilon^m => lambda {b} = 0$
+  3. Мера ограниченного измеримого множества конечна
+  4. Любое измеримое множество - объединение множеств конечной меры
+  5. Если $E subset RR^m$ и $forall epsilon > 0$, найдутся такие $A epsilon subset E subset B epsilon$, такие что $A epsilon, B epsilon in cal(L)^m$ и $lambda(B_epsilon \\ A_epsilon) < epsilon$. Тогда $E$ - измеримо \ Замечание: это свойство есть у любой полной меры \ Доказательство: $epsilon = 1/n, A = union.big_(n=1)^oo A_(1/n)$ - измеримо, $A subset E subset B, B = inter.big_(n=1)^oo B_(1/n)$ \ $B \\ A subset B_(1/n) \\ A_(1/n)$ \ $lambda(B \\ A) <= lambda(B_(1/n) \\ A_(1/n)) < 1/n => lambda (B \\ A) = 0$ \ $E \\ A subset B \\ A$ и $lambda (B \\ A) = 0 => E \\ A$ - измеримо $=> E = A union.sq E \\ A$ - измеримо
+  6. Если $E subset RR^m$ и $forall epsilon > 0$ найдется такое $B_epsilon in cal(L)^m$, что $E subset B_epsilon$ и $lambda B_epsilon < epsilon$, то $E$ - измеримо и $lambda E = 0$ \ Доказательство: $A_epsilon != 0 =>  E$ - измеримо $=> lambda E <= lambda B_epsilon < epsilon => lambda E = 0$
+  7. Счетное объединение множеств нулевой меры - измеримо и имеет нулевую меру
+  8. Счетное множество измеримо и имеет меру $0$
+  9. Если $lambda E = 0$, то $"Int" E != 0$ \ Доказательство: От противного, если $a in "Int" E$, то $B_r (a) subset E => 0 < lambda B_r (a) <= lambda E$
+  10. Если $lambda E = 0$ и $epsilon > 0$, то найдутся такие кубические ячейки $Q_k$, что $E subset union.big_(k=1)^oo Q_k$ и $sum_(k=1)^oo lambda Q_k < epsilon$ \ Доказательство: $lambda E = inf {sum_(k=1)^oo lambda P_k: P_k in cal(P)_QQ^m "и" E subset union.big_(k=1)^oo P_k}$ \ Выберем такие $P_k in cal(P)_QQ^m$, что $sum_(k=1)^oo lambda P_k < epsilon$ и $E subset union.big_(k=1)^oo P_k$ \ длины сторон $P_k$ рациональны $a_1/b, a_2/b, dots a_m/b$ - нарезаем на кубические ячейки со стороной $1/b$
+  11. $c in RR, H_k (c) = {x in RR^m: x_k = 0}$ Тогда $lambda H_k (c) = 0$$"   "n-1$ мерная гиперплоскость \ Доказательство $A_n = H_k (c) inter (-n, n)^m => H_k (c) = union.big_(n=1)^oo A_n$ \ Достаточно доказать, что $lambda A_n = 0$ \ $A_n subset (-n, n] times dots  times (-n, n] times (c-epsilon, c] times (-n, n] times dots times (-n,n]$, $lambda = 2 epsilon (2n)^(m-1)$
+
+  12. Любое множество содержащееся в не более чем счетном объединении таких гиперплоскостей, имеет нулевую меру
+
+  13. $lambda (a,b) = lambda (a,b] = lambda [a,b]$ \ Доказательство: $lambda [a,b] <= lambda (a,b) -?$ $[a,b] \\ (a,b)$ - подмножество конечных объединений гиперплоскостей из пункта 11
+]
+
+#note[
+  1. Существует несчетное множество нулевой меры
+
+  $m>=2, H_1 (0)$
+
+  $m=1$ Канторово множество #image("image.png", height: 2cm) - то, что осталось - канторово множество. $lambda K + sum lambda "вык" = 1, 1/3 + 2 dot 1/9 + 4/27 + dots = 1/3 sum_(k=0)^oo (2/3)^k = 1/3 dot (1/(1-2/3)) = 1 => lambda K = 0$
+
+  Что происходит в троичной системе счисления?  0,222222222 = 1,0000, выкенем числа с нулем в периоде, тогда числу из $(0;1]$ однозначно сопоставляется последовательность из $0,1,2$
+
+  То есть Канторово множество - множество без 1 в троичной записи
+
+  Биекция $K$ и $(0, 1]$ (замением 2 на 1)
+
+  2. Существуют неизмеримые множества. Более того любое множество с положительной мерой содержит неизмеримое подмножество
+]
+
+#theorem[Регулярность меры Лебега][
+  $cal(E) in cal(L)^m$ и $epsilon > 0$. Тогда $exists G$ - открытое и $supset E$, такое что $lambda (G \\ E) < epsilon$
+]
+
+#proof[
+  Случай $lambda E < + oo$
+
+  $lambda E = inf {sum_(k=1)^oo lambda P_k: P_k "- ячейка и" E subset union.big_(k=1)^oo P_k}$
+
+  Выберем такие ячейки, что $sum_(k=1)^oo lambda P_k < lambda E + epsilon$ и $E subset union.big_(k=1)^oo P_k subset union.big_(k=1)^oo (a_k, b'_k) =: G$
+
+  $P_k = (a_k, b_k] subset (a_k, b'_k)$
+
+  Выберем $b'_k in RR^m$ так, что $lambda (a_k, b'_k) < lambda P_k + epsilon/2^k$
+
+  $G supset E$ и $G$ - открытое $lambda G <= sum_(k=1)^oo lambda(a_k, b'_k) < sum_(k=1)^oo (lambda P_k + epsilon/2^k) = epsilon + sum_(k=1)^oo lambda P_k < lambda E + 2epsilon$
+
+  $=> lambda (G \\ E) = lambda G - lambda E < 2 epsilon$
+
+  Случай $lambda E = +oo$ Тогда $E = union.big.sq_(k=1)^oo E_k$, т. ч. $lambda E_k < +oo$
+
+  По предыдущему случаю найдется $G_k supset E_k$, такое что $lambda (G_k \\ E_k) < epsilon/2^k$
+
+  $G = union.big_(k=1)^oo G_k supset union.big.sq_(k=1)^oo E_k = E$
+
+  $G \\ E subset union.big_(k=1)^oo G_k \\ E_k => lambda (G \\ E) <= sum_(k=1)^oo lambda (G_k \\ E_k) < sum_(k=1)^oo epsilon/2^k = epsilon$
+]
+
+#corollary[
+  1. $E in cal(L)^m$ и $epsilon > 0$. Тогда найдется $F$ - замкнутое подмножество $E$, такое что $lambda(E \\ F) < epsilon$ \ Доказательство: Подставим $X \\ E$ в теорему. Берем $G supset X \\ E$ и $lambda(G \\ (X \\ E)) < epsilon$ $F = X \\ G$ и $F subset E$
+
+  2. $E in cal(L)^m$ Тогда \ 1. $lambda E = inf {lambda G: G "- открытое и " E subset G}$ \ 2. $lambda E = sup{lambda F: F "- замкнутое и " E supset F}$ \ 3. $lambda E = sup{lambda K: K "- компакт и" K subset E}$ \ Доказательство: \ 1. Для $G$ из теоремы $lambda(G \\ E) < epsilon => lambda E<= lambda G <= lambda E + epsilon => lambda E = inf$ \ 2. Также только $F$ из следствия \ 3. $F$ - замкнутое множество $lambda F = lim_(n->oo) lambda (F inter [-n;n]^m)$ непр. меры снизу
+
+  3. $E in cal(L)^m$ Тогда существуют компакты $K_1 subset K_2 subset dots$ и $e$- множество нулевой меры, такое что $E = e union.sq union.big_(n=1)^oo K_n$ \ Доказательство: \ По 3. возьмем последовательность компактов $K_n subset E$, т.ч. $lambda K_n -> lambda E, e:= E \\ union.big_(n=1)^oo K_n subset E \\ K_n => lambda e <= lambda (E \\ K_n) = lambda E - lambda K_n -> 0 => lambda e = 0$ \ $K'_n = union_(j=1)^n K_j$ - вложенные компакты \ Пусть $lambda E = + oo, E = union.big.sq_(n=1)^oo E_n$, где $lambda E_n < +oo$ \ По $E_n$ строим $K_n_1 subset K_n_2 subset dots$ и $e_n: lambda e_n = 0$ и $E_n = e_n union union.big_(j=1)^n K_(n j)$ \ $E = union.big.sq_(n=1)^oo E_n = union.big.sq_(n=1)^oo (e_n union union.big_(j=1)^oo K_(n j)) = union.big_(n=1)^oo e_n union union.big_(n=1)^oo union.big_(j=1)^oo K_(n j), union.big_(n=1)^oo e_n = e$
+]
+
+#theorem[
+  $lambda$ - инвариант относительно сдвига, то есть сдвиг множество не меняет ни измеримость, ни меру
+]
+
+#proof[
+  $v$ - вектор сдвига
+
+  $mu E = lambda (E + v)$ на ячейках $lambda = mu$ по единственносить продолжим $mu = lambda$ везде
+]
+
+#theorem[
+  Пусть $mu$ - мера на $cal(L)^m$ со свойствами
+  + $mu$ - инвариантно относительно сдвига
+  + $mu$ конечна на ячейка ($= mu$ конечна на огр. изм. множествах)
+  Тогда $exists k in [0; +oo)$, т.ч. $mu E = k lambda E$ $forall E in cal(L)^m$
+]
+
+#proof[
+  Случай 1. $mu Q = 1$, где $Q = (0, 1]^m$
+
+  Проверим, что тогда $mu = lambda$ на $cal(P)_QQ^m$
+
+  $Q_n := (0, 1/n]^m lambda Q_n = 1/n^m$
+
+  $mu Q_n = 1/n^m$, т.к. $Q$ нарезается на $n^m$ сдвигов $Q_n => lambda Q_n = mu Q_n$ но любую ячейку на $cal(P)_QQ^m$ можно собрать из сдвигов таких кубиков $=>$ $lambda$ и $mu$ совпадают на $cal(P)_QQ^m => lambda$ и $mu$ совпадают на $cal(L)^m$
+
+  Случай $mu Q > 0$ $overline(mu) E = (mu E)/mu Q$ и $overline(mu)$ подходит под случай $1 => mu/k =  overline(mu) = lambda$
+
+  Случай $mu Q = 0, RR^m$ - счетное объединение сдвигов $Q => mu RR^m = 0 => k =0$
 ]
